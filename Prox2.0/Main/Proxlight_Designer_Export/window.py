@@ -80,7 +80,7 @@ def Admin_Bejelentkezes():
         image=img0,
         borderwidth=0,
         highlightthickness=0,
-        command=btn_clicked,
+        command=Admin_Kerdes_Kivalaszt,
         relief="flat")
 
     b0.place(
@@ -93,7 +93,7 @@ def Admin_Bejelentkezes():
         image=img1,
         borderwidth=0,
         highlightthickness=0,
-        command=btn_clicked,
+        command= Main_Menu,
         relief="flat")
 
     b1.place(
@@ -130,6 +130,79 @@ def Admin_Bejelentkezes():
         x=399, y=432,
         width=281,
         height=46)
+
+    window.resizable(False, False)
+    window.mainloop()
+def Admin_Kerdes_Kivalaszt():
+    background_img = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Background.png")
+    background = canvas.create_image(
+        540.0, 303.5,
+        image=background_img)
+
+    img0 = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Vissza.png")
+    b0 = Button(
+        image=img0,
+        borderwidth=0,
+        highlightthickness=0,
+        command=Admin_Bejelentkezes,
+        relief="flat")
+
+    b0.place(
+        x=930, y=544,
+        width=128,
+        height=50)
+
+    img1 = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Szerkeszt.png")
+    b1 = Button(
+        image=img1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=btn_clicked,
+        relief="flat")
+
+    b1.place(
+        x=55, y=277,
+        width=150,
+        height=36)
+
+    img2 = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Szerkeszt.png")
+    b2 = Button(
+        image=img2,
+        borderwidth=0,
+        highlightthickness=0,
+        command=btn_clicked,
+        relief="flat")
+
+    b2.place(
+        x=879, y=389,
+        width=150,
+        height=36)
+
+    img3 = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Szerkeszt.png")
+    b3 = Button(
+        image=img3,
+        borderwidth=0,
+        highlightthickness=0,
+        command=btn_clicked,
+        relief="flat")
+
+    b3.place(
+        x=879, y=277,
+        width=150,
+        height=36)
+
+    img4 = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Szerkeszt.png")
+    b4 = Button(
+        image=img4,
+        borderwidth=0,
+        highlightthickness=0,
+        command=btn_clicked,
+        relief="flat")
+
+    b4.place(
+        x=55, y=389,
+        width=150,
+        height=36)
 
     window.resizable(False, False)
     window.mainloop()
