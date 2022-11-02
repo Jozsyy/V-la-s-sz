@@ -19,42 +19,12 @@ canvas = Canvas(
     relief = "ridge")
 canvas.place(x = 0, y = 0)
 
-background_img = PhotoImage(file = f"background.png")
+background_img = PhotoImage(file = f"Admin_Kerdes_Szerkeszt_Background.png")
 background = canvas.create_image(
     540.0, 303.5,
     image=background_img)
 
-entry0_img = PhotoImage(file = f"img_textBox0.png")
-entry0_bg = canvas.create_image(
-    540.0, 304.0,
-    image = entry0_img)
-
-entry0 = Entry(
-    bd = 0,
-    bg = "#d9d9d9",
-    highlightthickness = 0)
-
-entry0.place(
-    x = 388, y = 272,
-    width = 304,
-    height = 62)
-
-entry1_img = PhotoImage(file = f"img_textBox1.png")
-entry1_bg = canvas.create_image(
-    540.0, 459.0,
-    image = entry1_img)
-
-entry1 = Entry(
-    bd = 0,
-    bg = "#d9d9d9",
-    highlightthickness = 0)
-
-entry1.place(
-    x = 388, y = 427,
-    width = 304,
-    height = 62)
-
-img0 = PhotoImage(file = f"img0.png")
+img0 = PhotoImage(file = f"Admin_Kerdes_Szerkeszt_Mentes.png")
 b0 = Button(
     image = img0,
     borderwidth = 0,
@@ -63,11 +33,11 @@ b0 = Button(
     relief = "flat")
 
 b0.place(
-    x = 444, y = 508,
-    width = 191,
-    height = 65)
+    x = 426, y = 497,
+    width = 228,
+    height = 96)
 
-img1 = PhotoImage(file = f"img1.png")
+img1 = PhotoImage(file = f"Admin_Kerdes_Szerkeszt_Vissza.png")
 b1 = Button(
     image = img1,
     borderwidth = 0,
@@ -76,7 +46,7 @@ b1 = Button(
     relief = "flat")
 
 b1.place(
-    x = 667, y = 523,
+    x = 894, y = 543,
     width = 178,
     height = 50)
 

@@ -19,12 +19,12 @@ canvas = Canvas(
     relief = "ridge")
 canvas.place(x = 0, y = 0)
 
-background_img = PhotoImage(file = f"background.png")
+background_img = PhotoImage(file = f"Jatsz_Background.png")
 background = canvas.create_image(
     540.0, 303.5,
     image=background_img)
 
-img0 = PhotoImage(file = f"img0.png")
+img0 = PhotoImage(file = f"Jatsz_Kijelentkezes.png")
 b0 = Button(
     image = img0,
     borderwidth = 0,
@@ -33,11 +33,11 @@ b0 = Button(
     relief = "flat")
 
 b0.place(
-    x = 894, y = 547,
-    width = 173,
-    height = 46)
+    x = 461, y = 448,
+    width = 157,
+    height = 58)
 
-img1 = PhotoImage(file = f"img1.png")
+img1 = PhotoImage(file = f"Jatsz_Kezdes.png")
 b1 = Button(
     image = img1,
     borderwidth = 0,
@@ -46,7 +46,7 @@ b1 = Button(
     relief = "flat")
 
 b1.place(
-    x = 426, y = 497,
+    x = 426, y = 304,
     width = 228,
     height = 96)
 

@@ -19,12 +19,12 @@ canvas = Canvas(
     relief = "ridge")
 canvas.place(x = 0, y = 0)
 
-background_img = PhotoImage(file = f"background.png")
+background_img = PhotoImage(file = f"Felhasznalo_Kerdes_Szerkesztes_Background.png")
 background = canvas.create_image(
     540.0, 303.5,
     image=background_img)
 
-img0 = PhotoImage(file = f"img0.png")
+img0 = PhotoImage(file = f"Felhasznalo_Kerdes_Szerkesztes_Mentes.png")
 b0 = Button(
     image = img0,
     borderwidth = 0,
@@ -33,11 +33,11 @@ b0 = Button(
     relief = "flat")
 
 b0.place(
-    x = 894, y = 543,
-    width = 178,
-    height = 50)
+    x = 426, y = 497,
+    width = 228,
+    height = 96)
 
-img1 = PhotoImage(file = f"img1.png")
+img1 = PhotoImage(file = f"Felhasznalo_Kerdes_Szerkesztes_Vissza.png")
 b1 = Button(
     image = img1,
     borderwidth = 0,
@@ -46,22 +46,9 @@ b1 = Button(
     relief = "flat")
 
 b1.place(
-    x = 894, y = 368,
-    width = 142,
-    height = 37)
-
-img2 = PhotoImage(file = f"img2.png")
-b2 = Button(
-    image = img2,
-    borderwidth = 0,
-    highlightthickness = 0,
-    command = btn_clicked,
-    relief = "flat")
-
-b2.place(
-    x = 426, y = 429,
-    width = 228,
-    height = 96)
+    x = 894, y = 543,
+    width = 178,
+    height = 50)
 
 window.resizable(False, False)
 window.mainloop()
