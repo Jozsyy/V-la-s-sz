@@ -3,6 +3,54 @@ from tkinter import *
 def btn_clicked():
     print("Button Clicked")
 
+def Menu():
+
+    background_img = PhotoImage(file = f"background.png")
+    background = canvas.create_image(
+            540.0, 303.5,
+            image=background_img)
+
+    img0 = PhotoImage(file = f"img0.png")  ##bejelentkezes button.
+    Bejelentkezes_Button = Button(
+            image = img0,
+            borderwidth = 0,
+            highlightthickness = 0,
+            command = Felhasznalo_Bejelentkezes,
+            relief = "flat")
+
+    Bejelentkezes_Button.place(
+            x = 398, y = 253,
+            width = 284,
+            height = 102)
+
+    img1 = PhotoImage(file = f"img1.png")
+    Regisztracio_button = Button(
+            image = img1,
+            borderwidth = 0,
+            highlightthickness = 0,
+            command = btn_clicked,
+            relief = "flat")
+
+    Regisztracio_button.place(
+            x = 398, y = 411,
+            width = 284,
+            height = 100)
+
+    img2 = PhotoImage(file = f"img2.png")
+    Admin_Button = Button(
+            image = img2,
+            borderwidth = 0,
+            highlightthickness = 0,
+            command = Admin_Bejelentkezes,
+            relief = "flat")
+
+    Admin_Button.place(
+            x = 9, y = 8,
+            width = 71,
+            height = 63)
+
+    window.resizable(False, False)
+    window.mainloop()
 
 def Admin_Bejelentkezes():
 
@@ -97,10 +145,6 @@ def Admin_Bejelentkezes():
         window.resizable(False, False)
         window.mainloop()
 
-    Bejelentkezes_Button.destroy()
-    Regisztracio_button.destroy()
-    Admin_Button.destroy()
-
 
 
     background_img = PhotoImage(file=f"Admin_background.png")
@@ -126,7 +170,7 @@ def Admin_Bejelentkezes():
         image=img1,
         borderwidth=0,
         highlightthickness=0,
-        command= btn_clicked,
+        command=Menu,
         relief="flat")
 
     Vissza_Admin_button.place(
@@ -221,7 +265,7 @@ def Felhasznalo_Bejelentkezes():
         image=img1,
         borderwidth=0,
         highlightthickness=0,
-        command=btn_clicked,
+        command=Menu,
         relief="flat")
 
     b1.place(
@@ -252,53 +296,9 @@ canvas = Canvas(
 canvas.place(x = 0, y = 0)
 
 
+Menu()
 
-background_img = PhotoImage(file = f"background.png")
-background = canvas.create_image(
-        540.0, 303.5,
-        image=background_img)
 
-img0 = PhotoImage(file = f"img0.png")  ##bejelentkezes button.
-Bejelentkezes_Button = Button(
-        image = img0,
-        borderwidth = 0,
-        highlightthickness = 0,
-        command = Felhasznalo_Bejelentkezes,
-        relief = "flat")
-
-Bejelentkezes_Button.place(
-        x = 398, y = 253,
-        width = 284,
-        height = 102)
-
-img1 = PhotoImage(file = f"img1.png")
-Regisztracio_button = Button(
-        image = img1,
-        borderwidth = 0,
-        highlightthickness = 0,
-        command = btn_clicked,
-        relief = "flat")
-
-Regisztracio_button.place(
-        x = 398, y = 411,
-        width = 284,
-        height = 100)
-
-img2 = PhotoImage(file = f"img2.png")
-Admin_Button = Button(
-        image = img2,
-        borderwidth = 0,
-        highlightthickness = 0,
-        command = Admin_Bejelentkezes,
-        relief = "flat")
-
-Admin_Button.place(
-        x = 9, y = 8,
-        width = 71,
-        height = 63)
-
-window.resizable(False, False)
-window.mainloop()
 
 
 
