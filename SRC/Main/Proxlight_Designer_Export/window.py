@@ -544,7 +544,7 @@ def regisztracio():
 def sikeresRegisztracio():
     def selfDestroy():
         SikeresRegisztracio_Bejelentkezes_Button.destroy()
-        SikeresRegisztracio_Vissza_Button.destroy()
+        SikeresRegisztracio_EXIT_Button.destroy()
 
 
     background_img = PhotoImage(file=f"SikeresRegisztracio_Backgr.png")
@@ -552,15 +552,15 @@ def sikeresRegisztracio():
         540.0, 303.5,
         image=background_img)
 
-    img0 = PhotoImage(file=f"SikeresRegisztracio_Vissza_Button.png")
-    SikeresRegisztracio_Vissza_Button = Button(
+    img0 = PhotoImage(file=f"EXIT.png")
+    SikeresRegisztracio_EXIT_Button = Button(
         image=img0,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda :[selfDestroy(),regisztracio()],
+        command=lambda :[selfDestroy(),Main_Menu()],
         relief="flat")
 
-    SikeresRegisztracio_Vissza_Button.place(
+    SikeresRegisztracio_EXIT_Button.place(
         x=461, y=459,
         width=157,
         height=58)
@@ -580,6 +580,52 @@ def sikeresRegisztracio():
 
     window.resizable(False, False)
     window.mainloop()
+
+def kerdes(): #Robi
+
+def jatsz():  #Robi
+
+def kategoriak_kivalaszt():  #Robi
+
+def felhasznalo_kerdes_szerk(): #Robi
+    def selfDestroy():
+        Felhasznalo_Kerdes_Szerkesztes_Mentes_Button.destroy()
+
+
+    background_img = PhotoImage(file=f"Felhasznalo_Kerdes_Szerkesztes_Background.png")
+    background = canvas.create_image(
+        540.0, 303.5,
+        image=background_img)
+
+    img0 = PhotoImage(file=f"Felhasznalo_Kerdes_Szerkesztes_Mentes.png")
+    Felhasznalo_Kerdes_Szerkesztes_Mentes_Button = Button(
+        image=img0,
+        borderwidth=0,
+        highlightthickness=0,
+        command=btn_clicked,
+        relief="flat")
+
+    Felhasznalo_Kerdes_Szerkesztes_Mentes_Button .place(
+        x=426, y=497,
+        width=228,
+        height=96)
+
+    img1 = PhotoImage(file=f"Felhasznalo_Kerdes_Szerkesztes_Vissza.png")
+    b1 = Button(
+        image=img1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=btn_clicked,
+        relief="flat")
+
+    b1.place(
+        x=894, y=543,
+        width=178,
+        height=50)
+
+    window.resizable(False, False)
+    window.mainloop()  #Robi
+
 
 
 ##Ez mindeniknel kozos
