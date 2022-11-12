@@ -668,6 +668,7 @@ def kategoriak_kivalaszt():  #Robi
 
 
     background_img = PhotoImage(file=f"Kategoriak_Background.png")
+
     background = canvas.create_image(
             540.0, 303.5,
             image=background_img)
