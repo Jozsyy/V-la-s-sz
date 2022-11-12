@@ -582,14 +582,143 @@ def sikeresRegisztracio():
     window.mainloop()
 
 def kerdes(): #Robi
+    def selfDestroy():
+        Kerdes_Vege_Button.destroy()
+        Kerdes_Mehet_Button.destroy()
+
+
+        background_img = PhotoImage(file=f"Kerdes_Background.png")
+        background = canvas.create_image(
+            540.0, 303.5,
+            image=background_img)
+
+        img0 = PhotoImage(file=f"Kerdes_Vege.png")
+         Kerdes_Vege_Button= Button(
+            image=img0,
+            borderwidth=0,
+            highlightthickness=0,
+            command=btn_clicked,
+            relief="flat")
+
+        Kerdes_Vege_Button.place(
+            x=894, y=547,
+            width=173,
+            height=46)
+
+        img1 = PhotoImage(file=f"Kerdes_Mehet.png")
+        Kerdes_Mehet_Button = Button(
+            image=img1,
+            borderwidth=0,
+            highlightthickness=0,
+            command=btn_clicked,
+            relief="flat")
+
+        Kerdes_Mehet_Button.place(
+            x=426, y=497,
+            width=228,
+            height=96)
+
+        window.resizable(False, False)
+        window.mainloop()
 
 def jatsz():  #Robi
+    def selfDestroy():
+    Jatsz_Kijelentkezes_Button.destroy()
+    Jatsz_Kezdes_Button.destroy()
+
+    background_img = PhotoImage(file=f"Jatsz_Background.png")
+    background = canvas.create_image(
+        540.0, 303.5,
+        image=background_img)
+
+    img0 = PhotoImage(file=f"Jatsz_Kijelentkezes.png")
+    Jatsz_Kijelentkezes_Button = Button(
+        image=img0,
+        borderwidth=0,
+        highlightthickness=0,
+        command=btn_clicked,
+        relief="flat")
+
+    Jatsz_Kijelentkezes_Button.place(
+        x=461, y=448,
+        width=157,
+        height=58)
+
+    img1 = PhotoImage(file=f"Jatsz_Kezdes.png")
+    Jatsz_Kezdes_Button = Button(
+        image=img1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=btn_clicked,
+        relief="flat")
+
+    Jatsz_Kezdes_Button.place(
+        x=426, y=304,
+        width=228,
+        height=96)
+
+    window.resizable(False, False)
+    window.mainloop()
+
 
 def kategoriak_kivalaszt():  #Robi
+    def selfDestroy():
+        Kategoriak_Vissza_Button.destroy()
+        Kategoriak_Szerkeszt_Button.destroy()
+        Kategoriak_Inditas_Button.destroy()
+
+
+        background_img = PhotoImage(file=f"Kategoriak_Background.png")
+        background = canvas.create_image(
+            540.0, 303.5,
+            image=background_img)
+
+        img0 = PhotoImage(file=f"Kategoriak_Vissza.png")
+        Kategoriak_Vissza_Button = Button(
+            image=img0,
+            borderwidth=0,
+            highlightthickness=0,
+            command=btn_clicked,
+            relief="flat")
+
+        Kategoriak_Vissza_Button.place(
+            x=894, y=543,
+            width=178,
+            height=50)
+
+        img1 = PhotoImage(file=f"Kategoriak_Szerkeszt.png")
+        Kategoriak_Szerkeszt_Button = Button(
+            image=img1,
+            borderwidth=0,
+            highlightthickness=0,
+            command=btn_clicked,
+            relief="flat")
+
+        Kategoriak_Szerkeszt_Button.place(
+            x=894, y=368,
+            width=142,
+            height=37)
+
+        img2 = PhotoImage(file=f"Kategoriak_Inditas.png")
+        Kategoriak_Inditas_Button = Button(
+            image=img2,
+            borderwidth=0,
+            highlightthickness=0,
+            command=btn_clicked,
+            relief="flat")
+
+        Kategoriak_Inditas_Button.place(
+            x=426, y=429,
+            width=228,
+            height=96)
+
+        window.resizable(False, False)
+        window.mainloop()
 
 def felhasznalo_kerdes_szerk(): #Robi
     def selfDestroy():
         Felhasznalo_Kerdes_Szerkesztes_Mentes_Button.destroy()
+        Felhasznalo_Kerdes_Szerkesztes_Vissza_Button.destroy()
 
 
     background_img = PhotoImage(file=f"Felhasznalo_Kerdes_Szerkesztes_Background.png")
@@ -611,14 +740,14 @@ def felhasznalo_kerdes_szerk(): #Robi
         height=96)
 
     img1 = PhotoImage(file=f"Felhasznalo_Kerdes_Szerkesztes_Vissza.png")
-    b1 = Button(
+    Felhasznalo_Kerdes_Szerkesztes_Vissza_Button = Button(
         image=img1,
         borderwidth=0,
         highlightthickness=0,
         command=btn_clicked,
         relief="flat")
 
-    b1.place(
+    Felhasznalo_Kerdes_Szerkesztes_Vissza_Button.place(
         x=894, y=543,
         width=178,
         height=50)
