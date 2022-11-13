@@ -382,7 +382,7 @@ def felhasznalo_bejelentkezes():
         image=img0,
         borderwidth=0,
         highlightthickness=0,
-        command=btn_clicked,
+        command=lambda :[selfDestroy(),jatsz()],
         relief="flat")
 
     Felhasznalo_Bejelentkezes_Belepes_Button.place(
@@ -597,7 +597,7 @@ def kerdes(): #Robi
             image=img0,
             borderwidth=0,
             highlightthickness=0,
-            command=btn_clicked,
+            command=lambda: [selfDestroy(),kategoriak_kivalaszt()],
             relief="flat")
 
     Kerdes_Vege_Button.place(
@@ -636,7 +636,7 @@ def jatsz():  #Robi
         image=img0,
         borderwidth=0,
         highlightthickness=0,
-        command=btn_clicked,
+        command=lambda: [selfDestroy(),Main_Menu()],
         relief="flat")
 
     Jatsz_Kijelentkezes_Button.place(
@@ -649,7 +649,7 @@ def jatsz():  #Robi
         image=img1,
         borderwidth=0,
         highlightthickness=0,
-        command=btn_clicked,
+        command= lambda: [selfDestroy(),kategoriak_kivalaszt()],
         relief="flat")
 
     Jatsz_Kezdes_Button.place(
@@ -678,7 +678,7 @@ def kategoriak_kivalaszt():  #Robi
             image=img0,
             borderwidth=0,
             highlightthickness=0,
-            command=btn_clicked,
+            command=lambda: [selfDestroy(),jatsz()],
             relief="flat")
 
     Kategoriak_Vissza_Button.place(
@@ -691,7 +691,7 @@ def kategoriak_kivalaszt():  #Robi
             image=img1,
             borderwidth=0,
             highlightthickness=0,
-            command=btn_clicked,
+            command=lambda: [selfDestroy(),felhasznalo_kerdes_szerk()],
             relief="flat")
 
     Kategoriak_Szerkeszt_Button.place(
@@ -704,7 +704,7 @@ def kategoriak_kivalaszt():  #Robi
             image=img2,
             borderwidth=0,
             highlightthickness=0,
-            command=btn_clicked,
+            command=lambda: [selfDestroy(),kerdes()],
             relief="flat")
 
     Kategoriak_Inditas_Button.place(
@@ -731,7 +731,7 @@ def felhasznalo_kerdes_szerk(): #Robi
         image=img0,
         borderwidth=0,
         highlightthickness=0,
-        command=btn_clicked,
+        command=lambda: [selfDestroy(),kategoriak_kivalaszt()],
         relief="flat")
 
     Felhasznalo_Kerdes_Szerkesztes_Mentes_Button .place(
@@ -744,7 +744,7 @@ def felhasznalo_kerdes_szerk(): #Robi
         image=img1,
         borderwidth=0,
         highlightthickness=0,
-        command=btn_clicked,
+        command=lambda: [selfDestroy(),kategoriak_kivalaszt()],
         relief="flat")
 
     Felhasznalo_Kerdes_Szerkesztes_Vissza_Button.place(
