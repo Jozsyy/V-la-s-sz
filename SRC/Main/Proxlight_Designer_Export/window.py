@@ -893,7 +893,9 @@ def kategoriak_kivalaszt():  #Robi
             image=img2,
             borderwidth=0,
             highlightthickness=0,
+
             command=lambda: [csinaljuk(valaszt),selfDestroy(),kerdes()],
+
             relief="flat")
 
     Kategoriak_Inditas_Button.place(
