@@ -2,6 +2,23 @@ from tkinter import *
 
 import array as arr
 
+import pyrebase
+
+#Pythonkod osszekotese az adatbazissal
+config={
+      "apiKey": "AIzaSyCVvp08oEuPrBFxEavuYOu7Nd9Hi1bo3Cw",
+      "authDomain": "valassz-715f5.firebaseapp.com",
+      "databaseURL": "https://valassz-715f5-default-rtdb.asia-southeast1.firebasedatabase.app",
+      "projectId": "valassz-715f5",
+      "storageBucket": "valassz-715f5.appspot.com",
+      "messagingSenderId": "1078959352066",
+      "appId": "1:1078959352066:web:e435a66a59064b2e4efa1b",
+      "measurementId": "G-ZWK4BL98PZ",
+      "databaseURL": "https://valassz-715f5-default-rtdb.asia-southeast1.firebasedatabase.app/"
+}
+
+firebase = pyrebase.initialize_app(config)
+database = firebase.database()
 def btn_clicked():
     print("Button Clicked")
 

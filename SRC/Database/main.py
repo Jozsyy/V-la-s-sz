@@ -23,8 +23,12 @@ database.child("Felhasznalok").child("Admin1").set(felhasznalo1)
 #Kategoriak tabla
 kategoria1 = {"Kategoria_ID": "1", "Nev":"Tudomanyos"}
 kategoria2 = {"Kategoria_ID": "2", "Nev":"Sport"}
+kategoria3 = {"Kategoria_ID": "3", "Nev":"Altalanos"}
+kategoria4 = {"Kategoria_ID": "4", "Nev":"Sajat"}
 database.child("Kategoriak").child("Kategoria1").set(kategoria1)
 database.child("Kategoriak").child("Kategoria2").set(kategoria2)
+database.child("Kategoriak").child("Kategoria3").set(kategoria3)
+database.child("Kategoriak").child("Kategoria4").set(kategoria4)
 
 #Kerdesek tabla
 kerdes1 = {"Kerdes_ID": "00000000", "Kerdes":"Mennyi a PI értéke?","Kategoria_ID":"Tudomanyos", "Felhasznalo_ID":"00000"}
