@@ -2,10 +2,6 @@ from tkinter import *
 
 import array as arr
 
-<<<<<<< HEAD
-
-
-=======
 import pyrebase
 
 #Pythonkod osszekotese az adatbazissal
@@ -23,7 +19,7 @@ config={
 
 firebase = pyrebase.initialize_app(config)
 database = firebase.database()
->>>>>>> Jozsi_branch
+
 def btn_clicked():
     print("Button Clicked")
 
@@ -774,59 +770,6 @@ def kerdes(): #Robi
     window.mainloop()
 
 def jatsz():  #Robi
-    def csinaljuk(valaszt):
-        if valaszt[0] == 1:
-            print("Egyes volt kivalasztva")
-        elif valaszt[1] == 1:
-            print("Kettes volt kivalasztva")
-        elif valaszt[2] == 1:
-            print("Harmas volt kivalasztva")
-        elif valaszt[3] == 1:
-            print("Sajat volt kivalasztva"),
-
-    valaszt = [arr.array('i', [0, 0, 0, 0]), ]
-
-    def egyesAktiv():
-        valaszt.insert(0, 1),
-        valaszt.insert(1, 0),
-        valaszt.insert(2, 0),
-        valaszt.insert(3, 0),
-        EgyesValaszt_Button.configure(background="#1F9393", activebackground="#1F9393"),
-        KettesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-        HarmasValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-        SajatValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-
-    def kettesAktiv():
-        valaszt.insert(0, 0),
-        valaszt.insert(1, 1),
-        valaszt.insert(2, 0),
-        valaszt.insert(3, 0),
-        EgyesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-        KettesValaszt_Button.configure(background="#1F9393", activebackground="#1F9393"),
-        HarmasValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-        SajatValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-
-    def harmasAktiv():
-        valaszt.insert(0, 0),
-        valaszt.insert(1, 0),
-        valaszt.insert(2, 1),
-        valaszt.insert(3, 0),
-        EgyesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-        KettesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-        HarmasValaszt_Button.configure(background="#1F9393", activebackground="#1F9393"),
-        SajatValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-
-    def sajatAktiv():
-        valaszt.insert(0, 0),
-        valaszt.insert(1, 0),
-        valaszt.insert(2, 0),
-        valaszt.insert(3, 1),
-        EgyesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-        KettesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-        HarmasValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
-        SajatValaszt_Button.configure(background="#1F9393", activebackground="#1F9393"),
-
-
     def selfDestroy():
         Jatsz_Kijelentkezes_Button.destroy()
         Jatsz_Kezdes_Button.destroy()
