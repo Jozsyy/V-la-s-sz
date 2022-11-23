@@ -32,17 +32,25 @@ database.child("Felhasznalok").child("Felhasznalo3").set(felhasznalo3)
 #Kategoriak tabla
 kategoria1 = {"Kategoria_ID": "1", "Nev":"Matematika"}
 kategoria2 = {"Kategoria_ID": "2", "Nev":"Sport"}
+<<<<<<< HEAD
 kategoria3 = {"Kategoria_ID": "3", "Nev":"Foldrajz-Tortenelem"}
 kategoria4 = {"Kategoria_ID": "4", "Nev":"Elovilag"}
 kategoria5 = {"Kategoria_ID": "5", "Nev":"Tudomanyos"}
 kategoria6 = {"Kategoria_ID": "6", "Nev":"Altalanos"}
 
+=======
+kategoria3 = {"Kategoria_ID": "3", "Nev":"Altalanos"}
+kategoria4 = {"Kategoria_ID": "4", "Nev":"Sajat"}
+>>>>>>> Jozsi_branch
 database.child("Kategoriak").child("Kategoria1").set(kategoria1)
 database.child("Kategoriak").child("Kategoria2").set(kategoria2)
 database.child("Kategoriak").child("Kategoria3").set(kategoria3)
 database.child("Kategoriak").child("Kategoria4").set(kategoria4)
+<<<<<<< HEAD
 database.child("Kategoriak").child("Kategoria5").set(kategoria5)
 database.child("Kategoriak").child("Kategoria6").set(kategoria6)
+=======
+>>>>>>> Jozsi_branch
 
 #Kerdesek tabla
 #MATEMATIKA
