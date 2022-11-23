@@ -1,7 +1,6 @@
 from tkinter import *
 
 import array as arr
-
 import pyrebase
 
 #Pythonkod osszekotese az adatbazissal
@@ -495,6 +494,27 @@ def regisztracio():
         Regisztracio_FelhasznaloNev_Entry.destroy()
         Regisztracio_JelszoMegegyszer_Entry.destroy()
 
+    def save():
+        vezeteknev = Regisztracio_VezetekNev_Entry.get()
+        keresztnev = Regisztracio_Keresztnev_Entry.get()
+        felhasznalonev = Regisztracio_FelhasznaloNev_Entry.get()
+        email = Regisztracio_Email_Entry.get()
+        #jelszo=******
+        jelszo = Regisztracio_Jelszo_Entry.get()
+        jelszo2 = Regisztracio_JelszoMegegyszer_Entry.get()
+        #id
+
+        #email megerosites
+        auth = firebase.auth()
+        auth.create_user_with_email_and_password(email,jelszo)
+        user = auth.sign_in_with_email_and_password(email, jelszo)
+        auth.send_email_verification(user['idtoken'])
+
+        felhasznalo = {"Felhasznalo_ID": "00004", "Vezeteknev": vezeteknev, "Keresztnev": keresztnev,
+                        "Felhasznalonev":felhasznalonev, "Jelszo": jelszo,"Email": email, "Pontszam": "0"}
+        database.child("Felhasznalok").child("Felhasznalo1").set(felhasznalo)
+
+
     background_img = PhotoImage(file=f"Regisztracio_Background.png")
     background = canvas.create_image(
         540.0, 303.5,
@@ -505,7 +525,7 @@ def regisztracio():
         image=img0,
         borderwidth=0,
         highlightthickness=0,
-        command= lambda: [selfDestroy(),sikeresRegisztracio()],
+        command= lambda: [save(),selfDestroy(),sikeresRegisztracio()],
         relief="flat")
 
     Regisztracio_Regisztralas_Button .place(
@@ -547,22 +567,6 @@ def regisztracio():
         935.5, 315.5,
         image=entry1_img)
 
-    Regisztracio_JelszoMegegyszer_Entry = Entry(
-        font=("Josefin Sans", 18),
-        bd=0,
-        bg="#ffffff",
-        highlightthickness=0)
-
-    Regisztracio_JelszoMegegyszer_Entry.place(
-        x=838, y=300,
-        width=177,
-        height=39)
-
-    entry2_img = PhotoImage(file=f"Regisztracio_TextBox3.png")
-    entry2_bg = canvas.create_image(
-        341.0, 303.5,
-        image=entry2_img)
-
     Regisztracio_Keresztnev_Entry = Entry(
         font=("Josefin Sans", 18),
         bd=0,
@@ -574,10 +578,10 @@ def regisztracio():
         width=268,
         height=39)
 
-    entry3_img = PhotoImage(file=f"Regisztracio_TextBox4.png")
-    entry3_bg = canvas.create_image(
-        376.0, 393.5,
-        image=entry3_img)
+    entry2_img = PhotoImage(file=f"Regisztracio_TextBox3.png")
+    entry2_bg = canvas.create_image(
+        341.0, 303.5,
+        image=entry2_img)
 
     Regisztracio_FelhasznaloNev_Entry = Entry(
         font=("Josefin Sans", 18),
@@ -588,6 +592,22 @@ def regisztracio():
     Regisztracio_FelhasznaloNev_Entry.place(
         x=262, y=376,
         width=198,
+        height=39)
+
+    entry3_img = PhotoImage(file=f"Regisztracio_TextBox4.png")
+    entry3_bg = canvas.create_image(
+        376.0, 393.5,
+        image=entry3_img)
+
+    Regisztracio_Email_Entry = Entry(
+        font=("Josefin Sans", 18),
+        bd=0,
+        bg="#ffffff",
+        highlightthickness=0)
+
+    Regisztracio_Email_Entry.place(
+        x=145, y=478,
+        width=268,
         height=39)
 
     entry4_img = PhotoImage(file=f"Regisztracio_TextBox5.png")
@@ -611,15 +631,15 @@ def regisztracio():
         289.0, 493.5,
         image=entry5_img)
 
-    Regisztracio_Email_Entry = Entry(
+    Regisztracio_JelszoMegegyszer_Entry = Entry(
         font=("Josefin Sans", 18),
         bd=0,
         bg="#ffffff",
         highlightthickness=0)
 
-    Regisztracio_Email_Entry.place(
-        x=145, y=478,
-        width=268,
+    Regisztracio_JelszoMegegyszer_Entry.place(
+        x=838, y=300,
+        width=177,
         height=39)
 
     window.resizable(False, False)
