@@ -2,6 +2,8 @@ from tkinter import *
 
 import array as arr
 
+
+
 def btn_clicked():
     print("Button Clicked")
 
@@ -12,12 +14,14 @@ def Admin_Kerdes_Kivalaszt():
            Admin_Kerdes_Kivalaszt_Szerkeszt_Button3.destroy()
            Admin_Kerdes_Kivalaszt_Szerkeszt_Button4.destroy()
            Admin_Kerdes_Kivalaszt_Vissza_Button.destroy()
-
+           kategoria1_Label.destroy();
 
        background_img = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Background.png")
        background = canvas.create_image(
             540.0, 303.5,
             image=background_img)
+       global kategoria1_Label
+       kategoria1_Label = Label(window,text = "Tudományos",background="#201F93",fg="#FFFFFF",font=("Josefin Sans",20)).place(x = 274,y = 241)
 
        img0 = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Vissza.png")
        Admin_Kerdes_Kivalaszt_Vissza_Button = Button(
@@ -750,6 +754,59 @@ def kerdes(): #Robi
     window.mainloop()
 
 def jatsz():  #Robi
+    def csinaljuk(valaszt):
+        if valaszt[0] == 1:
+            print("Egyes volt kivalasztva")
+        elif valaszt[1] == 1:
+            print("Kettes volt kivalasztva")
+        elif valaszt[2] == 1:
+            print("Harmas volt kivalasztva")
+        elif valaszt[3] == 1:
+            print("Sajat volt kivalasztva"),
+
+    valaszt = [arr.array('i', [0, 0, 0, 0]), ]
+
+    def egyesAktiv():
+        valaszt.insert(0, 1),
+        valaszt.insert(1, 0),
+        valaszt.insert(2, 0),
+        valaszt.insert(3, 0),
+        EgyesValaszt_Button.configure(background="#1F9393", activebackground="#1F9393"),
+        KettesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+        HarmasValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+        SajatValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+
+    def kettesAktiv():
+        valaszt.insert(0, 0),
+        valaszt.insert(1, 1),
+        valaszt.insert(2, 0),
+        valaszt.insert(3, 0),
+        EgyesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+        KettesValaszt_Button.configure(background="#1F9393", activebackground="#1F9393"),
+        HarmasValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+        SajatValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+
+    def harmasAktiv():
+        valaszt.insert(0, 0),
+        valaszt.insert(1, 0),
+        valaszt.insert(2, 1),
+        valaszt.insert(3, 0),
+        EgyesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+        KettesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+        HarmasValaszt_Button.configure(background="#1F9393", activebackground="#1F9393"),
+        SajatValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+
+    def sajatAktiv():
+        valaszt.insert(0, 0),
+        valaszt.insert(1, 0),
+        valaszt.insert(2, 0),
+        valaszt.insert(3, 1),
+        EgyesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+        KettesValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+        HarmasValaszt_Button.configure(background="#201F93", activebackground="#201F93"),
+        SajatValaszt_Button.configure(background="#1F9393", activebackground="#1F9393"),
+
+
     def selfDestroy():
         Jatsz_Kijelentkezes_Button.destroy()
         Jatsz_Kezdes_Button.destroy()
