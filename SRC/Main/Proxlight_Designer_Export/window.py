@@ -532,12 +532,13 @@ def regisztracio():
         image=entry0_img)
 
     Regisztracio_VezetekNev_Entry = Entry(
+        font=("Josefin Sans",18),
         bd=0,
         bg="#ffffff",
         highlightthickness=0)
 
     Regisztracio_VezetekNev_Entry.place(
-        x=207, y=201,
+        x=207, y=205,
         width=268,
         height=39)
 
@@ -546,13 +547,14 @@ def regisztracio():
         935.5, 315.5,
         image=entry1_img)
 
-    Regisztracio_Keresztnev_Entry = Entry(
+    Regisztracio_JelszoMegegyszer_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#ffffff",
         highlightthickness=0)
 
-    Regisztracio_Keresztnev_Entry .place(
-        x=847, y=295,
+    Regisztracio_JelszoMegegyszer_Entry.place(
+        x=838, y=300,
         width=177,
         height=39)
 
@@ -561,13 +563,14 @@ def regisztracio():
         341.0, 303.5,
         image=entry2_img)
 
-    Regisztracio_FelhasznaloNev_Entry = Entry(
+    Regisztracio_Keresztnev_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#ffffff",
         highlightthickness=0)
 
-    Regisztracio_FelhasznaloNev_Entry.place(
-        x=207, y=283,
+    Regisztracio_Keresztnev_Entry.place(
+        x=207, y=288,
         width=268,
         height=39)
 
@@ -576,13 +579,14 @@ def regisztracio():
         376.0, 393.5,
         image=entry3_img)
 
-    Regisztracio_Email_Entry = Entry(
+    Regisztracio_FelhasznaloNev_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#ffffff",
         highlightthickness=0)
 
-    Regisztracio_Email_Entry.place(
-        x=277, y=373,
+    Regisztracio_FelhasznaloNev_Entry.place(
+        x=262, y=376,
         width=198,
         height=39)
 
@@ -592,12 +596,13 @@ def regisztracio():
         image=entry4_img)
 
     Regisztracio_Jelszo_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#ffffff",
         highlightthickness=0)
 
     Regisztracio_Jelszo_Entry.place(
-        x=685, y=200,
+        x=670, y=205,
         width=272,
         height=39)
 
@@ -606,13 +611,14 @@ def regisztracio():
         289.0, 493.5,
         image=entry5_img)
 
-    Regisztracio_JelszoMegegyszer_Entry = Entry(
+    Regisztracio_Email_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#ffffff",
         highlightthickness=0)
 
-    Regisztracio_JelszoMegegyszer_Entry .place(
-        x=155, y=473,
+    Regisztracio_Email_Entry.place(
+        x=145, y=478,
         width=268,
         height=39)
 
@@ -1015,6 +1021,14 @@ def felhasznalo_kerdes_szerk(): #Robi
         threeButton.destroy()
         fourButton.destroy()
 
+    def save():
+        kerdes=Kerdes_Entry.get()
+        valasz1=Valasz_1_Entry.get()
+        valasz2 = Valasz_2_Entry.get()
+        valasz3 = Valasz_3_Entry.get()
+        valasz4 = Valasz_4_Entry.get()
+        #print(kerdes+'\n'+valasz1+' '+valasz2+' '+valasz3+' '+valasz4)
+
 
     background_img = PhotoImage(file=f"Felhasznalo_Kerdes_Szerkesztes_Background.png")
     background = canvas.create_image(
@@ -1026,7 +1040,7 @@ def felhasznalo_kerdes_szerk(): #Robi
         image=img0,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: [selfDestroy(),kategoriak_kivalaszt()],
+        command=lambda: [save(),selfDestroy(),kategoriak_kivalaszt()],
         relief="flat")
 
     Felhasznalo_Kerdes_Szerkesztes_Mentes_Button .place(

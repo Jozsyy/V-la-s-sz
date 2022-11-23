@@ -67,7 +67,7 @@ database.child("Kerdesek").child("Kerdes6").set(kerdes6)
 
 
 #Valaszok tabla
-valasz1= {"Valasz_id":"00000000","Kerdes_ID": "00000001","Jo_Valasz":"3.14159", "Rossz_Valasz1":"3.13153",
+valasz1= {"Valasz_id":"00000001","Kerdes_ID": "00000001","Jo_Valasz":"3.14159", "Rossz_Valasz1":"3.13153",
            "Rossz_Valasz2":"3.15141","Rossz_Valasz3":"2.71828"}
 database.child("Valaszok").child("Valasz1").set(valasz1)
 
