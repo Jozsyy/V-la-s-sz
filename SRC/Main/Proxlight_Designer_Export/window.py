@@ -169,6 +169,7 @@ def Admin_Bejelentkezes():
         image=FelhasznaloNev_Entry_img)
 
     FelhasznaloNev_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#d9d9d9",
         highlightthickness=0)
@@ -184,9 +185,11 @@ def Admin_Bejelentkezes():
         image=Jelszo_Entry_img)
 
     Jelszo_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#d9d9d9",
-        highlightthickness=0)
+        highlightthickness=0,
+        show='*')
 
     Jelszo_Entry.place(
         x=399, y=432,
@@ -503,6 +506,19 @@ def felhasznalo_bejelentkezes():
         Felhasznalo_Bejelentkezes_Vissza_Button.destroy()
 
 
+    def verification():
+        felhasznalonev=FelhasznaloNev_Bejelentkezes_Entry.get()
+        jelszo=FelhasznaloJelszo_Bejelentkezes_Entry.get()
+        '''
+            lambda:[]
+        command = lambda: [verification(), selfDestroy(), jatsz()],
+        jelszoo=database.child("Felhasznalok").child(felhasznalonev).child("Jelszo").get()
+        if jelszo==str(jelszoo):
+            lambda:[selfDestroy(), jatsz()]
+        else:
+            felhasznalo_bejelentkezes()
+        '''
+
     background_img = PhotoImage(file=f"Felhasznalo_Bejelentkezes_Background.png")
 
 
@@ -516,14 +532,15 @@ def felhasznalo_bejelentkezes():
         image=entry0_img)
 
     FelhasznaloNev_Bejelentkezes_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#d9d9d9",
         highlightthickness=0)
 
     FelhasznaloNev_Bejelentkezes_Entry.place(
-        x=388, y=272,
-        width=304,
-        height=62)
+        x=399, y=282,
+        width=281,
+        height=46)
 
     entry1_img = PhotoImage(file=f"Felhasznalo_Bejelentkezes_TextBox2.png")
     entry1_bg = canvas.create_image(
@@ -531,22 +548,27 @@ def felhasznalo_bejelentkezes():
         image=entry1_img)
 
     FelhasznaloJelszo_Bejelentkezes_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#d9d9d9",
-        highlightthickness=0)
+        highlightthickness=0,
+        show='*')
 
     FelhasznaloJelszo_Bejelentkezes_Entry.place(
-        x=388, y=427,
-        width=304,
-        height=62)
+        x=399, y=432,
+        width=281,
+        height=46)
 
     img0 = PhotoImage(file=f"Felhasznalo_Bejelentkezes_Belepes.png")
     Felhasznalo_Bejelentkezes_Belepes_Button = Button(
         image=img0,
         borderwidth=0,
         highlightthickness=0,
+
         activebackground="#08082C",
-        command=lambda :[selfDestroy(),jatsz()],
+
+        command = lambda: [verification(), selfDestroy(), jatsz()],
+
         relief="flat")
 
     Felhasznalo_Bejelentkezes_Belepes_Button.place(
@@ -587,16 +609,15 @@ def regisztracio():
         keresztnev = Regisztracio_Keresztnev_Entry.get()
         felhasznalonev = Regisztracio_FelhasznaloNev_Entry.get()
         email = Regisztracio_Email_Entry.get()
-        #jelszo=******
         jelszo = Regisztracio_Jelszo_Entry.get()
         jelszo2 = Regisztracio_JelszoMegegyszer_Entry.get()
         #id
 
         #email megerosites
         auth = firebase.auth()
-        auth.create_user_with_email_and_password(email,jelszo)
-        user = auth.sign_in_with_email_and_password(email, jelszo)
-        auth.send_email_verification(user['idtoken'])
+        #auth.create_user_with_email_and_password(email,jelszo)
+        #user = auth.sign_in_with_email_and_password(email, jelszo)
+        #auth.send_email_verification(user['idToken'])
 
         felhasznalo = {"Felhasznalo_ID": "00004", "Vezeteknev": vezeteknev, "Keresztnev": keresztnev,
                         "Felhasznalonev":felhasznalonev, "Jelszo": jelszo,"Email": email, "Pontszam": "0"}
@@ -711,7 +732,8 @@ def regisztracio():
         font=("Josefin Sans", 18),
         bd=0,
         bg="#ffffff",
-        highlightthickness=0)
+        highlightthickness=0,
+        show='*')
 
     Regisztracio_Jelszo_Entry.place(
         x=670, y=205,
@@ -727,7 +749,8 @@ def regisztracio():
         font=("Josefin Sans", 18),
         bd=0,
         bg="#ffffff",
-        highlightthickness=0)
+        highlightthickness=0,
+        show='*')
 
     Regisztracio_JelszoMegegyszer_Entry.place(
         x=838, y=300,
