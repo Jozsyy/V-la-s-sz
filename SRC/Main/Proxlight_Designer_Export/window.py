@@ -507,6 +507,7 @@ def felhasznalo_bejelentkezes():
 
 
     def verification():
+        #Entrykbol kimentjuk az adatokat
         felhasznalonev=FelhasznaloNev_Bejelentkezes_Entry.get()
         jelszo=FelhasznaloJelszo_Bejelentkezes_Entry.get()
         '''
@@ -514,10 +515,19 @@ def felhasznalo_bejelentkezes():
         command = lambda: [verification(), selfDestroy(), jatsz()],
         jelszoo=database.child("Felhasznalok").child(felhasznalonev).child("Jelszo").get()
         if jelszo==str(jelszoo):
+
+        #Felhasznalonevhez tartozo kod az adatbazisbol
+        jelszoo=database.child("Felhasznalok").child(felhasznalonev).child("Jelszo").get().val()
+
+        if jelszo == str(jelszoo):
             lambda:[selfDestroy(), jatsz()]
         else:
+            #Hiba ablak
             felhasznalo_bejelentkezes()
+<<<<<<< HEAD
         '''
+=======
+>>>>>>> Jozsi_branch
 
     background_img = PhotoImage(file=f"Felhasznalo_Bejelentkezes_Background.png")
 
@@ -605,6 +615,7 @@ def regisztracio():
         Regisztracio_JelszoMegegyszer_Entry.destroy()
 
     def save():
+        #Az adatokat elmentjuk az adatbazisba
         vezeteknev = Regisztracio_VezetekNev_Entry.get()
         keresztnev = Regisztracio_Keresztnev_Entry.get()
         felhasznalonev = Regisztracio_FelhasznaloNev_Entry.get()
@@ -612,14 +623,24 @@ def regisztracio():
         jelszo = Regisztracio_Jelszo_Entry.get()
         jelszo2 = Regisztracio_JelszoMegegyszer_Entry.get()
         #id
+        if jelszo!=jelszo2:
+            #Hiba ablak
+            print("A ket jelszo nem ugyanaz")
+
+        Felhasznalok = database.child("Felhasznalok").get().val()
+        id=len(Felhasznalok)+1
 
         #email megerosites
         auth = firebase.auth()
         #auth.create_user_with_email_and_password(email,jelszo)
         #user = auth.sign_in_with_email_and_password(email, jelszo)
         #auth.send_email_verification(user['idToken'])
+        auth.create_user_with_email_and_password(email,jelszo)
+        user = auth.sign_in_with_email_and_password(email, jelszo)
+        auth.send_email_verification(user['idToken'])
 
         felhasznalo = {"Felhasznalo_ID": "00004", "Vezeteknev": vezeteknev, "Keresztnev": keresztnev,
+        felhasznalo = {"Felhasznalo_ID": id, "Vezeteknev": vezeteknev, "Keresztnev": keresztnev,
                         "Felhasznalonev":felhasznalonev, "Jelszo": jelszo,"Email": email, "Pontszam": "0"}
         database.child("Felhasznalok").child("Felhasznalo1").set(felhasznalo)
 
