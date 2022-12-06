@@ -433,6 +433,7 @@ def felhasznalo_bejelentkezes():
         if jelszo == str(jelszoo):
             lambda:[selfDestroy(), jatsz()]
         else:
+            #Hiba ablak
             felhasznalo_bejelentkezes()
 
     background_img = PhotoImage(file=f"Felhasznalo_Bejelentkezes_Background.png")
@@ -522,6 +523,7 @@ def regisztracio():
         jelszo = Regisztracio_Jelszo_Entry.get()
         jelszo2 = Regisztracio_JelszoMegegyszer_Entry.get()
         if jelszo!=jelszo2:
+            #Hiba ablak
             print("A ket jelszo nem ugyanaz")
 
         Felhasznalok = database.child("Felhasznalok").get().val()
