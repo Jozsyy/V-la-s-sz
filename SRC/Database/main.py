@@ -16,17 +16,20 @@ firebase = pyrebase.initialize_app(config)
 database = firebase.database()
 
 #Felhasznalok tabla
-felhasznalo1 = {"Felhasznalo_ID": "00001","Vezeteknev": "Miklo", "Keresztnev": "Jozsef-Peter", "Jelszo":"valassz123",
+felhasznalo1 = {"Felhasznalo_ID": "1","Vezeteknev": "Miklo", "Keresztnev": "Jozsef-Peter", "Jelszo":"valassz123",
        "Email":"miklo.jozsef@yahoo.com", "Pontszam":"0"}
 database.child("Felhasznalok").child("Admin1").set(felhasznalo1)
 
-felhasznalo2 = {"Felhasznalo_ID": "00002","Vezeteknev": "Sarkany", "Keresztnev": "Illes", "Jelszo":"valassz1234",
+felhasznalo2 = {"Felhasznalo_ID": "2","Vezeteknev": "Sarkany", "Keresztnev": "Illes", "Jelszo":"valassz1234",
        "Email":"sarkany.illes@student.ms.sapientia.ro", "Pontszam":"0"}
 database.child("Felhasznalok").child("Admin2").set(felhasznalo2)
 
-felhasznalo3 = {"Felhasznalo_ID": "00003","Vezeteknev": "Bartha", "Keresztnev": "Robert", "Jelszo":"valassz12345",
+felhasznalo3 = {"Felhasznalo_ID": "3","Vezeteknev": "Bartha", "Keresztnev": "Robert", "Jelszo":"valassz12345",
        "Email":"bartha.robert1@gmail.com", "Pontszam":"0"}
 database.child("Felhasznalok").child("Admin3").set(felhasznalo3)
+
+Felhasznalok=database.child("Felhasznalok").get().val()
+print(len(Felhasznalok))
 
 
 #Kategoriak tabla
@@ -67,7 +70,7 @@ database.child("Kerdesek").child("Kerdes6").set(kerdes6)
 
 
 #Valaszok tabla
-valasz1= {"Valasz_id":"00000000","Kerdes_ID": "00000001","Jo_Valasz":"3.14159", "Rossz_Valasz1":"3.13153",
+valasz1= {"Valasz_id":"00000001","Kerdes_ID": "00000001","Jo_Valasz":"3.14159", "Rossz_Valasz1":"3.13153",
            "Rossz_Valasz2":"3.15141","Rossz_Valasz3":"2.71828"}
 database.child("Valaszok").child("Valasz1").set(valasz1)
 
