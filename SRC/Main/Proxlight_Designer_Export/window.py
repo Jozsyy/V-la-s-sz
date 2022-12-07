@@ -519,12 +519,9 @@ def felhasznalo_bejelentkezes():
             lambda:[selfDestroy(), jatsz()]
         else:
             felhasznalo_bejelentkezes()
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> main
 
     background_img = PhotoImage(file=f"Felhasznalo_Bejelentkezes_Background.png")
 
@@ -574,7 +571,7 @@ def felhasznalo_bejelentkezes():
 
         activebackground="#08082C",
 
-        command = lambda: [verification(), selfDestroy()],
+        command = lambda: [verification(), selfDestroy(), jatsz()],
 
         relief="flat")
 
