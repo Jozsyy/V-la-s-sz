@@ -205,9 +205,6 @@ def Main_Menu():
         Regisztracio_button.destroy()
         Admin_Button.destroy()
 
-
-
-
     background_img = PhotoImage(file=f"background.png")
 
     background = canvas.create_image(
@@ -516,12 +513,12 @@ def felhasznalo_bejelentkezes():
         jelszoo=database.child("Felhasznalok").child(felhasznalonev).child("Jelszo").get().val()
 
         if jelszo == str(jelszoo):
-            lambda:[selfDestroy(), jatsz()]
+            selfDestroy()
+            jatsz()
         else:
-            felhasznalo_bejelentkezes()
-
-
-
+            labelError = Label(text="Helytelen jelszó vagy nem létező felhasználónév", bg="#0B0B31", font=("Josefin Sans", 18), fg="red")
+            labelError.place(x=270, y=160)
+            labelError.after(1500, lambda: [labelError.destroy()])
 
     background_img = PhotoImage(file=f"Felhasznalo_Bejelentkezes_Background.png")
 
@@ -568,11 +565,8 @@ def felhasznalo_bejelentkezes():
         image=img0,
         borderwidth=0,
         highlightthickness=0,
-
         activebackground="#08082C",
-
-        command = lambda: [verification(), selfDestroy(), jatsz()],
-
+        command = lambda:[verification()],
         relief="flat")
 
     Felhasznalo_Bejelentkezes_Belepes_Button.place(
@@ -616,22 +610,40 @@ def regisztracio():
         email = Regisztracio_Email_Entry.get()
         jelszo = Regisztracio_Jelszo_Entry.get()
         jelszo2 = Regisztracio_JelszoMegegyszer_Entry.get()
-        if jelszo!=jelszo2:
-            #Hiba ablak
-            print("A ket jelszo nem ugyanaz")
 
-        Felhasznalok = database.child("Felhasznalok").get().val()
-        id=len(Felhasznalok)+1
+        letezofelhasznalonev=database.child("Felhasznalok").child(felhasznalonev).get().val()
+        #Lekerdezzuk az adatbazisbol a felhasznalonevhez tartozo adatokat (Ha 'None' akkor meg nem letezik a felhasznalonev)
+        if str(letezofelhasznalonev)=='None':
+            if jelszo!=jelszo2:
+                labelError = Label(text="A két jelszó nem ugyanaz!", bg="#0B0B31",
+                                   font=("Josefin Sans", 18), fg="red")
+                labelError.place(x=370, y=160)
+                labelError.after(1500, lambda: [labelError.destroy()])
+            else:
+                Felhasznalok = database.child("Felhasznalok").get().val()
+                id=len(Felhasznalok)+1
 
-        #email megerosites
-        auth = firebase.auth()
-        auth.create_user_with_email_and_password(email,jelszo)
-        user = auth.sign_in_with_email_and_password(email, jelszo)
-        auth.send_email_verification(user['idToken'])
-
-        felhasznalo = {"Felhasznalo_ID": id, "Vezeteknev": vezeteknev, "Keresztnev": keresztnev,
-                        "Felhasznalonev":felhasznalonev, "Jelszo": jelszo,"Email": email, "Pontszam": "0"}
-        database.child("Felhasznalok").child(felhasznalonev).set(felhasznalo)
+                #email megerosites
+                try:
+                    auth = firebase.auth()
+                    auth.create_user_with_email_and_password(email,jelszo)
+                    user = auth.sign_in_with_email_and_password(email, jelszo)
+                    auth.send_email_verification(user['idToken'])
+                    felhasznalo = {"Felhasznalo_ID": id, "Vezeteknev": vezeteknev, "Keresztnev": keresztnev,
+                                    "Felhasznalonev":felhasznalonev, "Jelszo": jelszo,"Email": email, "Pontszam": "0"}
+                    database.child("Felhasznalok").child(felhasznalonev).set(felhasznalo)
+                    selfDestroy()
+                    sikeresRegisztracio()
+                except:
+                    labelError = Label(text="Már létező email cím vagy túl rövid jelszó!", bg="#0B0B31",
+                                       font=("Josefin Sans", 18), fg="red")
+                    labelError.place(x=370, y=160)
+                    labelError.after(1500, lambda: [labelError.destroy()])
+        else:
+            labelError = Label(text="A felhasználónév már létezik!", bg="#0B0B31",
+                               font=("Josefin Sans", 18), fg="red")
+            labelError.place(x=370, y=160)
+            labelError.after(1500, lambda: [labelError.destroy()])
 
 
     background_img = PhotoImage(file=f"Regisztracio_Background.png")
@@ -647,7 +659,7 @@ def regisztracio():
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command= lambda: [save(),selfDestroy(),sikeresRegisztracio()],
+        command= lambda: [save()],
         relief="flat")
 
     Regisztracio_Regisztralas_Button .place(

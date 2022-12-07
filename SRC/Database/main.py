@@ -28,9 +28,6 @@ felhasznalo3 = {"Felhasznalo_ID": "3","Vezeteknev": "Bartha", "Keresztnev": "Rob
        "Email":"bartha.robert1@gmail.com", "Pontszam":"0"}
 database.child("Felhasznalok").child("Admin3").set(felhasznalo3)
 
-Felhasznalok=database.child("Felhasznalok").get().val()
-print(len(Felhasznalok))
-
 
 #Kategoriak tabla
 kategoria1 = {"Kategoria_ID": "1", "Nev":"Tudomanyos"}
@@ -93,3 +90,6 @@ database.child("Valaszok").child("Valasz5").set(valasz5)
 valasz6= {"Valasz_id":"00000006","Kerdes_ID": "00000006","Jo_Valasz":"Compact Disc", "Rossz_Valasz1":"Merevlemez",
            "Rossz_Valasz2":"Compact Disco","Rossz_Valasz3":"Counter Day"}
 database.child("Valaszok").child("Valasz6").set(valasz6)
+
+
+print(database.child("Felhasznalok").child("Admin5").get().val())
