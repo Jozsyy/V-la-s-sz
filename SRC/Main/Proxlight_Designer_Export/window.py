@@ -19,7 +19,6 @@ config={
 
 firebase = pyrebase.initialize_app(config)
 database = firebase.database()
-pontszam = 0
 pontszam = 0;
 
 def btn_clicked():
@@ -519,7 +518,6 @@ def felhasznalo_bejelentkezes():
         if jelszo == str(jelszoo):
             lambda:[selfDestroy(), jatsz()]
         else:
-            #Hiba ablak
             felhasznalo_bejelentkezes()
 <<<<<<< HEAD
 =======
@@ -1001,13 +999,11 @@ def jatsz():  #Robi
         Jatsz_Kezdes_Button.destroy()
         label1.destroy()
 
-    background_img = PhotoImage(file=f"Jatssz_Background.png")
     background_img = PhotoImage(file=f"Jatsz_Background.png")
     background = canvas.create_image(
         540.0, 303.5,
         image=background_img)
 
-    label1 = Label(text=pontszam, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
     label1 = Label(text=pontszam,
                    font=("Josefin Sans", 20),
                    bg="#18115E",
@@ -1501,9 +1497,5 @@ canvas = Canvas(
     highlightthickness = 0,
     relief = "ridge")
 canvas.place(x = 0, y = 0)
-
-
-
-
 
 Main_Menu()
