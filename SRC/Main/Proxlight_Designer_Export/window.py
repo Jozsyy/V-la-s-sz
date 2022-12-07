@@ -519,10 +519,6 @@ def felhasznalo_bejelentkezes():
         else:
             #Hiba ablak
             felhasznalo_bejelentkezes()
-<<<<<<< HEAD
-        '''
-=======
->>>>>>> Jozsi_branch
 
     background_img = PhotoImage(file=f"Felhasznalo_Bejelentkezes_Background.png")
 
@@ -572,7 +568,7 @@ def felhasznalo_bejelentkezes():
 
         activebackground="#08082C",
 
-        command = lambda: [verification(), selfDestroy(), jatsz()],
+        command = lambda: [verification(), selfDestroy()],
 
         relief="flat")
 
