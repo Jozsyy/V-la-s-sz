@@ -20,6 +20,7 @@ config={
 firebase = pyrebase.initialize_app(config)
 database = firebase.database()
 pontszam = 0
+pontszam = 0;
 
 def btn_clicked():
     print("Button Clicked")
@@ -353,6 +354,7 @@ def admin_kerdes_szerkeszt():
         image=entry0_img)
 
     Kerdes_Entry = Entry(
+        font=15,
         bd=0,
         bg="#659cce",
         highlightthickness=0)
@@ -519,6 +521,12 @@ def felhasznalo_bejelentkezes():
         else:
             #Hiba ablak
             felhasznalo_bejelentkezes()
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> main
 
     background_img = PhotoImage(file=f"Felhasznalo_Bejelentkezes_Background.png")
 
@@ -994,11 +1002,18 @@ def jatsz():  #Robi
         label1.destroy()
 
     background_img = PhotoImage(file=f"Jatssz_Background.png")
+    background_img = PhotoImage(file=f"Jatsz_Background.png")
     background = canvas.create_image(
         540.0, 303.5,
         image=background_img)
 
     label1 = Label(text=pontszam, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
+    label1 = Label(text=pontszam,
+                   font=("Josefin Sans", 20),
+                   bg="#18115E",
+                   fg="#F39C29")
+
+
     label1.place(x = 190,y = 62)
 
     img0 = PhotoImage(file=f"Jatsz_Kijelentkezes.png")
