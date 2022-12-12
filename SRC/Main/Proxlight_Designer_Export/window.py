@@ -1109,8 +1109,8 @@ def kategoriak_kivalaszt():  #Robi
 
     def doingEnable():
         if valaszt[0] == int(0):
-            labelError = Label(text="Válassz egy kategóriát!", bg="#0B0B31",font =15 , fg="red")
-            labelError.place(x=435, y=390)
+            labelError = Label(text="Válassz egy kategóriát!", bg="#0B0B31",font=("Josefin Sans", 18) , fg="red")
+            labelError.place(x=425, y=385)
             labelError.after(1500, lambda: [labelError.destroy()])
         else:
             csinaljuk()
