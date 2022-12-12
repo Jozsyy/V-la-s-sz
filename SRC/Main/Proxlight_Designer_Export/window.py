@@ -129,6 +129,22 @@ def Admin_Bejelentkezes():
         FelhasznaloNev_Entry.destroy()
         Jelszo_Entry.destroy()
 
+    def verification():
+        #Entrykbol kimentjuk az adatokat
+        felhasznalonev=FelhasznaloNev_Entry.get()
+        jelszo=Jelszo_Entry.get()
+
+        #Felhasznalonevhez tartozo kod az adatbazisbol
+        jelszoo=database.child("Felhasznalok").child(felhasznalonev).child("Jelszo").get().val()
+
+        if  (felhasznalonev == 'Admin1' or felhasznalonev == 'Admin2' or felhasznalonev == 'Admin3') and jelszo == str(jelszoo):
+            selfDestroy()
+            Admin_Kerdes_Kivalaszt()
+        else:
+            labelError = Label(text="Helytelen jelszó vagy nem létező admin!", bg="#0B0B31", font=("Josefin Sans", 18), fg="red")
+            labelError.place(x=350, y=165)
+            labelError.after(1500, lambda: [labelError.destroy()])
+
 
     background_img = PhotoImage(file=f"Admin_background.png")
     background = canvas.create_image(
@@ -141,7 +157,7 @@ def Admin_Bejelentkezes():
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command=lambda :[selfDestroy(),Admin_Kerdes_Kivalaszt()],
+        command=lambda :[verification()],
         relief="flat")
 
     Belep_Admin_button.place(
@@ -1345,6 +1361,7 @@ def felhasznalo_kerdes_szerk(): #Robi
         image=entry0_img)
 
     Kerdes_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#659cce",
         highlightthickness=0)
@@ -1360,12 +1377,13 @@ def felhasznalo_kerdes_szerk(): #Robi
         image=entry1_img)
 
     Valasz_1_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#659cce",
         highlightthickness=0)
 
     Valasz_1_Entry.place(
-        x=84, y=322,
+        x=75, y=325,
         width=407,
         height=40)
 
@@ -1375,12 +1393,13 @@ def felhasznalo_kerdes_szerk(): #Robi
         image=entry2_img)
 
     Valasz_2_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#659cce",
         highlightthickness=0)
 
     Valasz_2_Entry.place(
-        x=84, y=408,
+        x=80, y=411,
         width=407,
         height=40)
 
@@ -1390,12 +1409,13 @@ def felhasznalo_kerdes_szerk(): #Robi
         image=entry3_img)
 
     Valasz_3_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#659cce",
         highlightthickness=0)
 
     Valasz_3_Entry.place(
-        x=609, y=322,
+        x=605, y=325,
         width=407,
         height=40)
 
@@ -1405,12 +1425,13 @@ def felhasznalo_kerdes_szerk(): #Robi
         image=entry4_img)
 
     Valasz_4_Entry = Entry(
+        font=("Josefin Sans", 18),
         bd=0,
         bg="#659cce",
         highlightthickness=0)
 
     Valasz_4_Entry.place(
-        x=609, y=408,
+        x=605, y=411,
         width=407,
         height=40)
 
@@ -1488,7 +1509,7 @@ def felhasznalo_kerdes_szerk(): #Robi
         height=54)
 
     window.resizable(False, False)
-    window.mainloop()  #Robi
+    window.mainloop()
 
 
 
