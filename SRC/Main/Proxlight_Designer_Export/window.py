@@ -19,7 +19,12 @@ config={
 
 firebase = pyrebase.initialize_app(config)
 database = firebase.database()
+
+
+
+
 pontszam = 0;
+
 
 def btn_clicked():
     print("Button Clicked")
@@ -529,8 +534,12 @@ def felhasznalo_bejelentkezes():
         jelszoo=database.child("Felhasznalok").child(felhasznalonev).child("Jelszo").get().val()
 
         if jelszo == str(jelszoo):
-            selfDestroy()
-            jatsz()
+
+           selfDestroy()
+           jatsz(felhasznalonev)
+           selfDestroy()
+           jatsz(felhasznalonev)
+
         else:
             labelError = Label(text="Helytelen jelszó vagy nem létező felhasználónév", bg="#0B0B31", font=("Josefin Sans", 18), fg="red")
             labelError.place(x=270, y=160)
@@ -582,7 +591,9 @@ def felhasznalo_bejelentkezes():
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command = lambda:[verification()],
+        command = lambda: [verification(), selfDestroy()],
+
+
         relief="flat")
 
     Felhasznalo_Bejelentkezes_Belepes_Button.place(
@@ -840,8 +851,9 @@ def sikeresRegisztracio():
     window.resizable(False, False)
     window.mainloop()
 
-def kerdes(): #Robi
+def kerdes(felhasznalonev): #Robi
 
+    pontszam = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     valaszt = arr.array('i', [0])
     alapSzin = "#659CCE"
     kivalSzin = "#1F9393"
@@ -886,7 +898,11 @@ def kerdes(): #Robi
         valasz2_button.destroy()
         valasz3_button.destroy()
         valasz4_button.destroy()
-        label1.destroy()
+
+        pontszam_label.destroy()
+
+    pontszam_label = Label(text=pontszam, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
+    pontszam_label.place(x = 180,y = 19)
 
 
     img2 = PhotoImage(file=f"Kerdes_Tovabb.png")
@@ -895,7 +911,7 @@ def kerdes(): #Robi
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command=lambda :[selfDestroy(),kerdes()],
+        command=lambda :[selfDestroy(),kerdes(felhasznalonev)],
         relief="flat")
 
     Kerdes_Tovabb_Button.place(
@@ -914,7 +930,7 @@ def kerdes(): #Robi
             borderwidth=0,
             activebackground="#08082C",
             highlightthickness=0,
-            command=lambda: [selfDestroy(),kategoriak_kivalaszt()],
+            command=lambda: [selfDestroy(),kategoriak_kivalaszt(felhasznalonev)],
             relief="flat")
 
     Kerdes_Vege_Button.place(
@@ -929,7 +945,7 @@ def kerdes(): #Robi
             highlightthickness=0,
             state=DISABLED,
             activebackground="#08082C",
-            command=lambda :[csinaljuk(),selfDestroy(),kerdes()],
+            command=lambda :[csinaljuk(),selfDestroy(),kerdes(felhasznalonev)],
             relief="flat")
 
     Kerdes_Mehet_Button.place(
@@ -991,8 +1007,7 @@ def kerdes(): #Robi
         width=480,
         height=58)
 
-    label1 = Label(text=pontszam, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
-    label1.place(x = 180,y = 19)
+
 
 
 
@@ -1018,24 +1033,44 @@ def kerdes(): #Robi
     window.resizable(False, False)
     window.mainloop()
 
-def jatsz():  #Robi
+def jatsz(felhasznalonev):  #Robi
+
+    pontszam = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
+
     def selfDestroy():
         Jatsz_Kijelentkezes_Button.destroy()
         Jatsz_Kezdes_Button.destroy()
-        label1.destroy()
+        pontszam_label.destroy()
+        felhasznaloNev_label.destroy()
 
     background_img = PhotoImage(file=f"Jatsz_Background.png")
     background = canvas.create_image(
         540.0, 303.5,
         image=background_img)
 
-    label1 = Label(text=pontszam,
+
+
+
+    pontszam_label = Label(text=pontszam,
+
                    font=("Josefin Sans", 20),
                    bg="#18115E",
                    fg="#F39C29")
 
 
+
+    pontszam_label.place(x = 190,y = 62)
+
+    felhasznaloNev_label = Label(
+                   text=felhasznalonev,
+                   font=("Josefin Sans", 20),
+                   bg="#18115E",
+                   fg="#F39C29")
+    felhasznaloNev_label.place(x = 29,y = 14)
+
+
     label1.place(x = 190,y = 62)
+
 
     img0 = PhotoImage(file=f"Jatsz_Kijelentkezes.png")
     Jatsz_Kijelentkezes_Button = Button(
@@ -1057,7 +1092,7 @@ def jatsz():  #Robi
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command= lambda: [selfDestroy(),kategoriak_kivalaszt()],
+        command= lambda: [selfDestroy(),kategoriak_kivalaszt(felhasznalonev)],
         relief="flat")
 
     Jatsz_Kezdes_Button.place(
@@ -1068,7 +1103,9 @@ def jatsz():  #Robi
     window.resizable(False, False)
     window.mainloop()
 
-def kategoriak_kivalaszt():  #Robi
+def kategoriak_kivalaszt(felhasznalonev):  #Robi
+
+    pontszam = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     valaszt = arr.array('i', [0])
     alapSzin = "#201F93"
     kivalSzin = "#1F9393"
@@ -1115,7 +1152,7 @@ def kategoriak_kivalaszt():  #Robi
         else:
             csinaljuk()
             selfDestroy()
-            kerdes()
+            kerdes(felhasznalonev)
 
 
 
@@ -1143,7 +1180,7 @@ def kategoriak_kivalaszt():  #Robi
             borderwidth=0,
             highlightthickness=0,
             activebackground="#08082C",
-            command=lambda: [selfDestroy(),jatsz()],
+            command=lambda: [selfDestroy(),jatsz(felhasznalonev)],
             relief="flat")
 
     Kategoriak_Vissza_Button.place(
@@ -1157,7 +1194,7 @@ def kategoriak_kivalaszt():  #Robi
             borderwidth=0,
             highlightthickness=0,
             activebackground="#08082C",
-            command=lambda: [selfDestroy(),felhasznalo_kerdes_szerk()],
+            command=lambda: [selfDestroy(),felhasznalo_kerdes_szerk(felhasznalonev)],
             relief="flat")
 
     Kategoriak_Szerkeszt_Button.place(
@@ -1256,10 +1293,43 @@ def kategoriak_kivalaszt():  #Robi
     window.resizable(False, False)
     window.mainloop()
 
-def felhasznalo_kerdes_szerk(): #Robi
+def felhasznalo_kerdes_szerk(felhasznalonev): #Robi
+
+
+
     valaszt = arr.array('i', [0])
     alapSzin = "#659CCE"
     kivalSzin = "#201F93"
+
+    def save(felhasznalonev):
+        felhasznaloID = database.child("Felhasznalok").child(felhasznalonev).child("Felhasznalo_ID").get().val()
+        Kerdes = Kerdes_Entry.get()
+        Valasz1 = Valasz_1_Entry.get()
+        Valasz2 = Valasz_2_Entry.get()
+        Valasz3 = Valasz_3_Entry.get()
+        Valasz4 = Valasz_4_Entry.get()
+
+        jovalasz = jovalaszfgv()
+
+        Kerdesek = database.child("Kerdesek").get().val()
+        Kerdesid = len(Kerdesek) + 1
+
+        Kategoria = 4 ##sajat
+        SajatKerdes = {"Felhasznalo_ID": felhasznaloID, "Kategoria_ID": Kategoria, "Kerdes": Kerdes,
+                        "Kerdes_ID":Kerdesid}
+        database.child("Kerdesek").child("Kerdes"+str(Kerdesid).set(SajatKerdes))
+
+        Valaszok = database.child("Valaszok").get().val()
+        Valaszid = len(Valaszok) + 1
+
+
+        SajatValasz = {"Felhasznalo_ID": felhasznaloID, "Kategoria_ID": Kategoria, "Kerdes": Kerdes,
+                        "Kerdes_ID":Kerdesid}
+
+
+
+
+
     def gombkivalaszt(gombszam):
 
         EgyesValaszt_Button.configure(background=alapSzin, activebackground=alapSzin),
@@ -1280,21 +1350,21 @@ def felhasznalo_kerdes_szerk(): #Robi
             HarmasValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
             valaszt[0] = 3
         elif gombszam == 4:
-            NegyestValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
+            NegyestVal3aszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
             valaszt[0] = 4
 
         Felhasznalo_Kerdes_Szerkesztes_Mentes_Button.configure(state=NORMAL)
 
 
-    def csinaljuk():
+    def jovalaszfgv():
         if valaszt[0]==int(1):
-            print("Egyes volt kivalasztva")
+            return Valasz_1_Entry.get()
         elif valaszt[0]== int(2):
-            print("Kettes volt kivalasztva")
+            return Valasz_2_Entry.get()
         elif valaszt[0]==int(3):
-            print("Harmas volt kivalasztva")
+            return Valasz_3_Entry.get()
         elif valaszt[0]==int(4):
-            print("Negyes volt kivalasztva"),
+            return Valasz_4_Entry.get(),
 
 
     def selfDestroy():
@@ -1312,13 +1382,6 @@ def felhasznalo_kerdes_szerk(): #Robi
         HarmasValaszt_Button.destroy()
         NegyestValaszt_Button.destroy()
 
-    def save():
-        kerdes=Kerdes_Entry.get()
-        valasz1=Valasz_1_Entry.get()
-        valasz2 = Valasz_2_Entry.get()
-        valasz3 = Valasz_3_Entry.get()
-        valasz4 = Valasz_4_Entry.get()
-        #print(kerdes+'\n'+valasz1+' '+valasz2+' '+valasz3+' '+valasz4)
 
 
     background_img = PhotoImage(file=f"Felhasznalo_Kerdes_Szerkesztes_Background.png")
@@ -1332,7 +1395,7 @@ def felhasznalo_kerdes_szerk(): #Robi
         borderwidth=0,
         highlightthickness=0,
         activebackground="#201F93",
-        command=lambda: [csinaljuk(),save(),selfDestroy(),kategoriak_kivalaszt()],
+        command=lambda: [save(felhasznalonev),selfDestroy(),kategoriak_kivalaszt(felhasznalonev)],
         relief="flat",
         state=DISABLED)
 
@@ -1347,7 +1410,7 @@ def felhasznalo_kerdes_szerk(): #Robi
         borderwidth=0,
         activebackground="#201F93",
         highlightthickness=0,
-        command=lambda: [selfDestroy(),kategoriak_kivalaszt()],
+        command=lambda: [selfDestroy(),kategoriak_kivalaszt(felhasznalonev)],
         relief="flat")
 
     Felhasznalo_Kerdes_Szerkesztes_Vissza_Button.place(
