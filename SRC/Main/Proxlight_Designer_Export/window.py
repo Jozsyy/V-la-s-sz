@@ -22,6 +22,10 @@ database = firebase.database()
 
 
 
+
+pontszam = 0;
+
+
 def btn_clicked():
     print("Button Clicked")
 
@@ -1011,20 +1015,28 @@ def jatsz(felhasznalonev):  #Robi
         540.0, 303.5,
         image=background_img)
 
+
+
+
     pontszam_label = Label(text=pontszam,
+
                    font=("Josefin Sans", 20),
                    bg="#18115E",
                    fg="#F39C29")
+
 
 
     pontszam_label.place(x = 190,y = 62)
 
     felhasznaloNev_label = Label(
-                    text=felhasznalonev,
+                   text=felhasznalonev,
                    font=("Josefin Sans", 20),
                    bg="#18115E",
                    fg="#F39C29")
     felhasznaloNev_label.place(x = 29,y = 14)
+
+
+    label1.place(x = 190,y = 62)
 
 
     img0 = PhotoImage(file=f"Jatsz_Kijelentkezes.png")
