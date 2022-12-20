@@ -29,7 +29,8 @@ pontszam = 0;
 def btn_clicked():
     print("Button Clicked")
 
-def Admin_Kerdes_Kivalaszt():
+#Choosing a question category for admins
+def admin_question_choose():
        valaszt = arr.array('i', [0])
 
        def selfDestroy():
@@ -70,7 +71,7 @@ def Admin_Kerdes_Kivalaszt():
             borderwidth=0,
             highlightthickness=0,
             activebackground="#08082C",
-            command=lambda: [selfDestroy(),Admin_Bejelentkezes()],
+            command=lambda: [selfDestroy(), admin_login()],
             relief="flat")
 
        Admin_Kerdes_Kivalaszt_Vissza_Button.place(
@@ -84,7 +85,7 @@ def Admin_Kerdes_Kivalaszt():
             borderwidth=0,
             highlightthickness=0,
             activebackground="#08082C",
-            command=lambda :[selfDestroy(),admin_kerdes_szerkeszt(1)],
+            command=lambda :[selfDestroy(), admin_question_edit(1)],
             relief="flat")
 
        Admin_Kerdes_Kivalaszt_Szerkeszt_Button1.place(
@@ -98,7 +99,7 @@ def Admin_Kerdes_Kivalaszt():
             borderwidth=0,
             highlightthickness=0,
             activebackground="#08082C",
-            command=lambda :[selfDestroy(),admin_kerdes_szerkeszt(4)],
+            command=lambda :[selfDestroy(), admin_question_edit(4)],
             relief="flat")
 
        Admin_Kerdes_Kivalaszt_Szerkeszt_Button2.place(
@@ -112,7 +113,7 @@ def Admin_Kerdes_Kivalaszt():
             borderwidth=0,
             highlightthickness=0,
             activebackground="#08082C",
-            command=lambda :[selfDestroy(),admin_kerdes_szerkeszt(3)],
+            command=lambda :[selfDestroy(), admin_question_edit(3)],
             relief="flat")
 
        Admin_Kerdes_Kivalaszt_Szerkeszt_Button3.place(
@@ -126,7 +127,7 @@ def Admin_Kerdes_Kivalaszt():
             borderwidth=0,
             highlightthickness=0,
             activebackground="#08082C",
-            command=lambda :[selfDestroy(),admin_kerdes_szerkeszt(2)],
+            command=lambda :[selfDestroy(), admin_question_edit(2)],
             relief="flat")
 
        Admin_Kerdes_Kivalaszt_Szerkeszt_Button4.place(
@@ -141,7 +142,9 @@ def Admin_Kerdes_Kivalaszt():
 
        window.resizable(False, False)
        window.mainloop()
-def admin_kerdes_szerkeszt(valaszt):
+
+#If the admin login was successful the admin can create or edit questions
+def admin_question_edit(valaszt):
     Kategoria = valaszt
     valaszt = arr.array('i', [0])
     alapSzin = "#659CCE"
@@ -253,7 +256,7 @@ def admin_kerdes_szerkeszt(valaszt):
         borderwidth=0,
         highlightthickness=0,
         activebackground=kivalSzin,
-        command=lambda: [save(Kategoria),selfDestroy(),Admin_Kerdes_Kivalaszt()],
+        command=lambda: [save(Kategoria), selfDestroy(), admin_question_choose()],
         state=DISABLED,
         relief="flat")
 
@@ -268,7 +271,7 @@ def admin_kerdes_szerkeszt(valaszt):
         borderwidth=0,
         highlightthickness=0,
         activebackground=kivalSzin,
-        command=lambda :[selfDestroy(),Admin_Kerdes_Kivalaszt()],
+        command=lambda :[selfDestroy(), admin_question_choose()],
         relief="flat")
 
     Admin_Kerdes_Szerkeszt_Vissza_Button.place(
@@ -431,7 +434,9 @@ def admin_kerdes_szerkeszt(valaszt):
 
     window.resizable(False, False)
     window.mainloop()
-def Admin_Bejelentkezes():
+
+#Login for admins
+def admin_login():
 
     def selfDestroy():
         Belep_Admin_button.destroy()
@@ -449,7 +454,7 @@ def Admin_Bejelentkezes():
 
         if  (felhasznalonev == 'Admin1' or felhasznalonev == 'Admin2' or felhasznalonev == 'Admin3') and jelszo == str(jelszoo):
             selfDestroy()
-            Admin_Kerdes_Kivalaszt()
+            admin_question_choose()
         else:
             labelError = Label(text="Helytelen jelszó vagy nem létező admin!", bg="#0B0B31", font=("Josefin Sans", 18), fg="red")
             labelError.place(x=350, y=165)
@@ -481,7 +486,7 @@ def Admin_Bejelentkezes():
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command= lambda :[selfDestroy(),Main_Menu()],
+        command= lambda :[selfDestroy(), main_menu()],
         relief="flat")
 
     Vissza_Admin_button.place(
@@ -525,7 +530,8 @@ def Admin_Bejelentkezes():
     window.resizable(False, False)
     window.mainloop()
 
-def Main_Menu():
+#From the main menu you can registrate or you can login to the game as user. There is one more secret login button for the admins
+def main_menu():
     def selfDestroy():
         Bejelentkezes_Button.destroy()
         Regisztracio_button.destroy()
@@ -543,7 +549,7 @@ def Main_Menu():
             borderwidth = 0,
             highlightthickness = 0,
             activebackground="#08082C",
-            command = lambda: [selfDestroy(),felhasznalo_bejelentkezes()],
+            command = lambda: [selfDestroy(), user_login()],
             relief = "flat")
 
     Bejelentkezes_Button.place(
@@ -557,7 +563,7 @@ def Main_Menu():
             borderwidth = 0,
             highlightthickness = 0,
             activebackground="#08082C",
-            command =  lambda: [selfDestroy(),regisztracio()],
+            command =  lambda: [selfDestroy(), registration()],
             relief = "flat")
 
     Regisztracio_button.place(
@@ -571,7 +577,7 @@ def Main_Menu():
             borderwidth = 0,
             highlightthickness = 0,
             activebackground="#08082C",
-            command =  lambda: [selfDestroy(),Admin_Bejelentkezes()],
+            command =  lambda: [selfDestroy(), admin_login()],
             relief = "flat")
 
     Admin_Button.place(
@@ -582,7 +588,8 @@ def Main_Menu():
     window.resizable(False, False)
     window.mainloop()
 
-def felhasznalo_bejelentkezes():
+#Login for users
+def user_login():
     def selfDestroy():
         FelhasznaloNev_Bejelentkezes_Entry.destroy()
         FelhasznaloJelszo_Bejelentkezes_Entry.destroy()
@@ -601,7 +608,7 @@ def felhasznalo_bejelentkezes():
         if jelszo == str(jelszoo):
 
            selfDestroy()
-           jatsz(felhasznalonev)
+           play(felhasznalonev)
 
         else:
             labelError = Label(text="Helytelen jelszó vagy nem létező felhasználónév", bg="#0B0B31", font=("Josefin Sans", 18), fg="red")
@@ -670,7 +677,7 @@ def felhasznalo_bejelentkezes():
         borderwidth=0,
         activebackground="#08082C",
         highlightthickness=0,
-        command=lambda :[selfDestroy(),Main_Menu()],
+        command=lambda :[selfDestroy(), main_menu()],
         relief="flat")
 
     Felhasznalo_Bejelentkezes_Vissza_Button.place(
@@ -681,7 +688,8 @@ def felhasznalo_bejelentkezes():
     window.resizable(False, False)
     window.mainloop()
 
-def regisztracio():
+#Registration for the users without you can't play
+def registration():
     def selfDestroy():
         Regisztracio_Regisztralas_Button.destroy()
         Regisztracio_Vissza_Button.destroy()
@@ -723,7 +731,7 @@ def regisztracio():
                                     "Felhasznalonev":felhasznalonev, "Jelszo": jelszo,"Email": email, "Pontszam": "0"}
                     database.child("Felhasznalok").child(felhasznalonev).set(felhasznalo)
                     selfDestroy()
-                    sikeresRegisztracio()
+                    successful_registration()
                 except:
                     labelError = Label(text="Már létező email cím vagy túl rövid jelszó!", bg="#0B0B31",
                                        font=("Josefin Sans", 18), fg="red")
@@ -763,7 +771,7 @@ def regisztracio():
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command= lambda: [selfDestroy(),Main_Menu()],
+        command= lambda: [selfDestroy(), main_menu()],
         relief="flat")
 
     Regisztracio_Vissza_Button.place(
@@ -872,7 +880,8 @@ def regisztracio():
     window.resizable(False, False)
     window.mainloop()
 
-def sikeresRegisztracio():
+#Successful registration as user
+def successful_registration():
     def selfDestroy():
         SikeresRegisztracio_Bejelentkezes_Button.destroy()
         SikeresRegisztracio_EXIT_Button.destroy()
@@ -889,7 +898,7 @@ def sikeresRegisztracio():
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command=lambda :[selfDestroy(),Main_Menu()],
+        command=lambda :[selfDestroy(), main_menu()],
         relief="flat")
 
     SikeresRegisztracio_EXIT_Button.place(
@@ -903,7 +912,7 @@ def sikeresRegisztracio():
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command=lambda :[selfDestroy(),felhasznalo_bejelentkezes()],
+        command=lambda :[selfDestroy(), user_login()],
         relief="flat")
 
     SikeresRegisztracio_Bejelentkezes_Button.place(
@@ -914,7 +923,8 @@ def sikeresRegisztracio():
     window.resizable(False, False)
     window.mainloop()
 
-def kerdes(felhasznalonev): #Robi
+#The quiz: 10 questions all with 4 answers from where you can choose one
+def question(felhasznalonev):
 
     pontszam = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     valaszt = arr.array('i', [0])
@@ -974,7 +984,7 @@ def kerdes(felhasznalonev): #Robi
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command=lambda :[selfDestroy(),kerdes(felhasznalonev)],
+        command=lambda :[selfDestroy(), question(felhasznalonev)],
         relief="flat")
 
     Kerdes_Tovabb_Button.place(
@@ -993,7 +1003,7 @@ def kerdes(felhasznalonev): #Robi
             borderwidth=0,
             activebackground="#08082C",
             highlightthickness=0,
-            command=lambda: [selfDestroy(),kategoriak_kivalaszt(felhasznalonev)],
+            command=lambda: [selfDestroy(), choose_category(felhasznalonev)],
             relief="flat")
 
     Kerdes_Vege_Button.place(
@@ -1008,7 +1018,7 @@ def kerdes(felhasznalonev): #Robi
             highlightthickness=0,
             state=DISABLED,
             activebackground="#08082C",
-            command=lambda :[csinaljuk(),selfDestroy(),kerdes(felhasznalonev)],
+            command=lambda :[csinaljuk(), selfDestroy(), question(felhasznalonev)],
             relief="flat")
 
     Kerdes_Mehet_Button.place(
@@ -1096,7 +1106,8 @@ def kerdes(felhasznalonev): #Robi
     window.resizable(False, False)
     window.mainloop()
 
-def jatsz(felhasznalonev):  #Robi
+#A window where you can view your score, you can go to play or you can go log out
+def play(felhasznalonev):
 
     pontszam = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
 
@@ -1141,7 +1152,7 @@ def jatsz(felhasznalonev):  #Robi
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command=lambda: [selfDestroy(),Main_Menu()],
+        command=lambda: [selfDestroy(), main_menu()],
         relief="flat")
 
     Jatsz_Kijelentkezes_Button.place(
@@ -1155,7 +1166,7 @@ def jatsz(felhasznalonev):  #Robi
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command= lambda: [selfDestroy(),kategoriak_kivalaszt(felhasznalonev)],
+        command= lambda: [selfDestroy(), choose_category(felhasznalonev)],
         relief="flat")
 
     Jatsz_Kezdes_Button.place(
@@ -1166,7 +1177,8 @@ def jatsz(felhasznalonev):  #Robi
     window.resizable(False, False)
     window.mainloop()
 
-def kategoriak_kivalaszt(felhasznalonev):  #Robi
+#Question category choosing
+def choose_category(felhasznalonev):
 
     pontszam = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     valaszt = arr.array('i', [0])
@@ -1215,7 +1227,7 @@ def kategoriak_kivalaszt(felhasznalonev):  #Robi
         else:
             csinaljuk()
             selfDestroy()
-            kerdes(felhasznalonev)
+            question(felhasznalonev)
 
 
 
@@ -1243,7 +1255,7 @@ def kategoriak_kivalaszt(felhasznalonev):  #Robi
             borderwidth=0,
             highlightthickness=0,
             activebackground="#08082C",
-            command=lambda: [selfDestroy(),jatsz(felhasznalonev)],
+            command=lambda: [selfDestroy(), play(felhasznalonev)],
             relief="flat")
 
     Kategoriak_Vissza_Button.place(
@@ -1257,7 +1269,7 @@ def kategoriak_kivalaszt(felhasznalonev):  #Robi
             borderwidth=0,
             highlightthickness=0,
             activebackground="#08082C",
-            command=lambda: [selfDestroy(),felhasznalo_kerdes_szerk(felhasznalonev)],
+            command=lambda: [selfDestroy(), user_question_create(felhasznalonev)],
             relief="flat")
 
     Kategoriak_Szerkeszt_Button.place(
@@ -1356,7 +1368,8 @@ def kategoriak_kivalaszt(felhasznalonev):  #Robi
     window.resizable(False, False)
     window.mainloop()
 
-def felhasznalo_kerdes_szerk(felhasznalonev): #Robi
+#Questions creating for users
+def user_question_create(felhasznalonev):
 
 
 
@@ -1483,7 +1496,7 @@ def felhasznalo_kerdes_szerk(felhasznalonev): #Robi
         borderwidth=0,
         highlightthickness=0,
         activebackground="#201F93",
-        command=lambda: [save(felhasznalonev),selfDestroy(),kategoriak_kivalaszt(felhasznalonev)],
+        command=lambda: [save(felhasznalonev), selfDestroy(), choose_category(felhasznalonev)],
         relief="flat",
         state=DISABLED)
 
@@ -1498,7 +1511,7 @@ def felhasznalo_kerdes_szerk(felhasznalonev): #Robi
         borderwidth=0,
         activebackground="#201F93",
         highlightthickness=0,
-        command=lambda: [selfDestroy(),kategoriak_kivalaszt(felhasznalonev)],
+        command=lambda: [selfDestroy(), choose_category(felhasznalonev)],
         relief="flat")
 
     Felhasznalo_Kerdes_Szerkesztes_Vissza_Button.place(
@@ -1663,8 +1676,6 @@ def felhasznalo_kerdes_szerk(felhasznalonev): #Robi
     window.mainloop()
 
 
-
-##Ez mindeniknel kozos
 window = Tk()
 
 window.geometry("1080x607")
@@ -1679,4 +1690,4 @@ canvas = Canvas(
     relief = "ridge")
 canvas.place(x = 0, y = 0)
 
-Main_Menu()
+main_menu()
