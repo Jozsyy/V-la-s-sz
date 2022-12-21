@@ -930,6 +930,16 @@ def question(felhasznalonev):
     valaszt = arr.array('i', [0])
     alapSzin = "#659CCE"
     kivalSzin = "#1F9393"
+    question=database.child("Kerdesek").child("Kerdes1").child("Kerdes").get().val()
+    good_answer=database.child("Valaszok").child("Valasz1").child("Jo_Valasz").get().val()
+    wrong_answer1=database.child("Valaszok").child("Valasz1").child("Rossz_Valasz1").get().val()
+    wrong_answer2=database.child("Valaszok").child("Valasz1").child("Rossz_Valasz2").get().val()
+    wrong_answer3 = database.child("Valaszok").child("Valasz1").child("Rossz_Valasz3").get().val()
+
+    # Add a question and answers to the canvas
+    question_label = Label(text=question, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
+    question_label.place(x=180, y=150)
+
 
     def gombkivalaszt(gombszam):
 
@@ -953,16 +963,6 @@ def question(felhasznalonev):
 
         Kerdes_Mehet_Button.configure(state=NORMAL),
 
-    def csinaljuk():
-        if valaszt[0] == int(1):
-            print("Egyes volt kivalasztva")
-        elif valaszt[0] == int(2):
-            print("Kettes volt kivalasztva")
-        elif valaszt[0] == int(3):
-            print("Harmas volt kivalasztva")
-        elif valaszt[0] == int(4):
-            print("Negyes volt kivalasztva"),
-
     def selfDestroy():
         Kerdes_Vege_Button.destroy()
         Kerdes_Mehet_Button.destroy()
@@ -973,6 +973,7 @@ def question(felhasznalonev):
         valasz4_button.destroy()
 
         pontszam_label.destroy()
+        question_label.destroy()
 
     pontszam_label = Label(text=pontszam, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
     pontszam_label.place(x = 180,y = 19)
@@ -1018,7 +1019,7 @@ def question(felhasznalonev):
             highlightthickness=0,
             state=DISABLED,
             activebackground="#08082C",
-            command=lambda :[csinaljuk(), selfDestroy(), question(felhasznalonev)],
+            command=lambda :[selfDestroy(), question(felhasznalonev)],
             relief="flat")
 
     Kerdes_Mehet_Button.place(
@@ -1028,7 +1029,7 @@ def question(felhasznalonev):
 
     img3 = PhotoImage(file=f"valasz1.png")
     valasz1_button = Button(
-        text="Valasz1",
+        text=good_answer,
         font=("Josefin Sans", 20),
         bg=alapSzin,
         fg="black",
@@ -1046,7 +1047,7 @@ def question(felhasznalonev):
 
     img4 = PhotoImage(file=f"valasz3.png")
     valasz3_button = Button(
-        text="Valasz3",
+        text=wrong_answer1,
         font=("Josefin Sans", 20),
         bg=alapSzin,
         fg="black",
@@ -1064,7 +1065,7 @@ def question(felhasznalonev):
 
     img5 = PhotoImage(file=f"valasz2.png")
     valasz2_button = Button(
-        text="Valasz2",
+        text=wrong_answer2,
         font=("Josefin Sans", 20),
         bg=alapSzin,
         fg="black",
@@ -1086,7 +1087,7 @@ def question(felhasznalonev):
 
     img6 = PhotoImage(file=f"valasz4.png")
     valasz4_button = Button(
-        text="Valasz4",
+        text=wrong_answer3,
         font=("Josefin Sans", 20),
         bg=alapSzin,
         fg="black",
@@ -1206,7 +1207,7 @@ def choose_category(felhasznalonev):
         elif gombszam == 4:
             NegyestValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
             valaszt[0] = 4
-
+    '''
     def csinaljuk():
         if valaszt[0]==int(1):
             print("Egyes volt kivalasztva")
@@ -1216,7 +1217,7 @@ def choose_category(felhasznalonev):
             print("Harmas volt kivalasztva")
         elif valaszt[0]==int(4):
             print("Negyes volt kivalasztva")
-
+    '''
 
 
     def doingEnable():
@@ -1225,13 +1226,8 @@ def choose_category(felhasznalonev):
             labelError.place(x=425, y=385)
             labelError.after(1500, lambda: [labelError.destroy()])
         else:
-            csinaljuk()
             selfDestroy()
             question(felhasznalonev)
-
-
-
-
 
     def selfDestroy():
         Kategoriak_Vissza_Button.destroy()
