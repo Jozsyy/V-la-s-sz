@@ -73,7 +73,7 @@ def admin_question_choose():
 
 
 
-
+       '''proba'''
 
 
        img0 = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Vissza.png")
