@@ -32,9 +32,8 @@ def btn_clicked():
 
 def Admin_Kerdes_Kivalaszt():
 
-    # Choosing a question category for admins
+    '''Choosing a question category for admins'''
 def admin_question_choose():
-
        valaszt = arr.array('i', [0])
 
        def selfDestroy():
@@ -463,7 +462,7 @@ def admin_question_edit(valaszt):
 
 def Admin_Bejelentkezes():
 
-    #Login for admins
+    '''Login for admins'''
 def admin_login():
 
 
@@ -567,7 +566,7 @@ def admin_login():
 
 def Main_Menu():
 
-    #From the main menu you can registrate or you can login to the game as user. There is one more secret login button for the admins
+    '''From the main menu you can registrate or you can login to the game as user. There is one more secret login button for the admins'''
 def main_menu():
 
     def selfDestroy():
@@ -631,7 +630,7 @@ def main_menu():
 
 def felhasznalo_bejelentkezes():
 
-    #Login for users
+    '''Login for users'''
 def user_login():
 
     def selfDestroy():
