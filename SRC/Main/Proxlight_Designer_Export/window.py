@@ -23,6 +23,7 @@ database = firebase.database()
 
 
 
+
 pontszam = 0;
 
 
@@ -460,7 +461,6 @@ def admin_question_edit(valaszt):
     window.resizable(False, False)
     window.mainloop()
 
-def Admin_Bejelentkezes():
 
     '''Login for admins'''
 def admin_login():
@@ -536,7 +536,8 @@ def admin_login():
         font=("Josefin Sans", 18),
         bd=0,
         bg="#d9d9d9",
-        highlightthickness=0)
+        highlightthickness=0,
+        justify='center')
 
     FelhasznaloNev_Entry.place(
         x=399, y=282,
@@ -553,7 +554,8 @@ def admin_login():
         bd=0,
         bg="#d9d9d9",
         highlightthickness=0,
-        show='*')
+        show='*',
+        justify='center')
 
     Jelszo_Entry.place(
         x=399, y=432,
@@ -564,9 +566,10 @@ def admin_login():
     window.mainloop()
 
 
-def Main_Menu():
 
-    '''From the main menu you can registrate or you can login to the game as user. There is one more secret login button for the admins'''
+
+
+'''From the main menu you can registrate or you can login to the game as user. There is one more secret login button for the admins'''
 def main_menu():
 
     def selfDestroy():
@@ -628,7 +631,7 @@ def main_menu():
     window.mainloop()
 
 
-def felhasznalo_bejelentkezes():
+
 
     '''Login for users'''
 def user_login():
@@ -675,7 +678,9 @@ def user_login():
         font=("Josefin Sans", 18),
         bd=0,
         bg="#d9d9d9",
-        highlightthickness=0)
+        highlightthickness=0,
+        justify='center'
+)
 
     FelhasznaloNev_Bejelentkezes_Entry.place(
         x=399, y=282,
@@ -692,7 +697,8 @@ def user_login():
         bd=0,
         bg="#d9d9d9",
         highlightthickness=0,
-        show='*')
+        show='*',
+         justify='center')
 
     FelhasznaloJelszo_Bejelentkezes_Entry.place(
         x=399, y=432,
@@ -981,8 +987,8 @@ def question(felhasznalonev):
     wrong_answer3 = database.child("Valaszok").child("Valasz1").child("Rossz_Valasz3").get().val()
 
     # Add a question and answers to the canvas
-    question_label = Label(text=question, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
-    question_label.place(x=180, y=150)
+    question_label = Label(text=question, font=("Josefin Sans", 20), bg="#659CCE", fg="#000000",anchor="center",width=45,height=4)
+    question_label.place(x=180, y=110)
 
 
     def gombkivalaszt(gombszam):
@@ -1034,7 +1040,7 @@ def question(felhasznalonev):
 
     Kerdes_Tovabb_Button.place(
         x=587, y=506,
-        width=216,
+        width=245,
         height=79)
 
     background_img = PhotoImage(file=f"Kerdes_Background.png")
@@ -1063,7 +1069,7 @@ def question(felhasznalonev):
             highlightthickness=0,
             state=DISABLED,
             activebackground="#08082C",
-            command=lambda :[selfDestroy(), question(felhasznalonev)],
+            command=lambda :[selfDestroy(),question(felhasznalonev)],
             relief="flat")
 
     Kerdes_Mehet_Button.place(
