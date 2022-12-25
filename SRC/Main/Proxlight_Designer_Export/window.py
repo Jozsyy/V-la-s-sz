@@ -3,6 +3,7 @@ from tkinter import Label
 import tkinter as tk
 import array as arr
 import pyrebase
+import random
 
 #Pythonkod osszekotese az adatbazissal
 config={
@@ -21,19 +22,11 @@ firebase = pyrebase.initialize_app(config)
 database = firebase.database()
 
 
-
-
-
-pontszam = 0;
-
-
 def btn_clicked():
     print("Button Clicked")
 
 
-def Admin_Kerdes_Kivalaszt():
-
-    '''Choosing a question category for admins'''
+#Choosing a question category for admins
 def admin_question_choose():
        valaszt = arr.array('i', [0])
 
@@ -155,54 +148,38 @@ def admin_question_choose():
 
        window.resizable(False, False)
        window.mainloop()
-def admin_kerdes_szerkeszt(valaszt):
-    Kategoria = valaszt
-    valaszt = arr.array('i', [0])
-    alapSzin = "#659CCE"
-    kivalSzin = "#201F93"
-
-
-
 #If the admin login was successful the admin can create or edit questions
 def admin_question_edit(valaszt):
     Kategoria = valaszt
     valaszt = arr.array('i', [0])
-    alapSzin = "#659CCE"
-    kivalSzin = "#201F93"
+    base_color = "#659CCE"
+    selected_color = "#201F93"
     def gombkivalaszt(gombszam):
 
 
-        EgyesValaszt_Button.configure(background=alapSzin, activebackground=alapSzin),
-        KettesValaszt_Button.configure(background=alapSzin, activebackground=alapSzin),
-        HarmasValaszt_Button.configure(background=alapSzin, activebackground=alapSzin),
-        NegyestValaszt_Button.configure(background=alapSzin, activebackground=alapSzin),
+        EgyesValaszt_Button.configure(background=base_color, activebackground=base_color),
+        KettesValaszt_Button.configure(background=base_color, activebackground=base_color),
+        HarmasValaszt_Button.configure(background=base_color, activebackground=base_color),
+        NegyestValaszt_Button.configure(background=base_color, activebackground=base_color),
 
         if gombszam == 1:
-            EgyesValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
+            EgyesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 1
 
         elif gombszam == 2:
-            KettesValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
+            KettesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 2
 
 
         elif gombszam == 3:
-            HarmasValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
+            HarmasValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 3
         elif gombszam == 4:
-            NegyestValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
+            NegyestValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 4
 
         Admin_Kerdes_Szerkeszt_Mentes_Button.configure(state=NORMAL)
-    def csinaljuk():
-        if valaszt[0]==int(1):
-            print("Egyes volt kivalasztva")
-        elif valaszt[0]== int(2):
-            print("Kettes volt kivalasztva")
-        elif valaszt[0]==int(3):
-            print("Harmas volt kivalasztva")
-        elif valaszt[0]==int(4):
-            print("Negyes volt kivalasztva"),
+
     def selfDestroy():
         Admin_Kerdes_Szerkeszt_Mentes_Button.destroy()
         Admin_Kerdes_Szerkeszt_Vissza_Button.destroy()
@@ -276,7 +253,7 @@ def admin_question_edit(valaszt):
         image=img0,
         borderwidth=0,
         highlightthickness=0,
-        activebackground=kivalSzin,
+        activebackground=selected_color,
         command=lambda: [save(Kategoria), selfDestroy(), admin_question_choose()],
         state=DISABLED,
         relief="flat")
@@ -291,7 +268,7 @@ def admin_question_edit(valaszt):
         image=img1,
         borderwidth=0,
         highlightthickness=0,
-        activebackground=kivalSzin,
+        activebackground=selected_color,
         command=lambda :[selfDestroy(), admin_question_choose()],
 
         relief="flat")
@@ -389,9 +366,9 @@ def admin_question_edit(valaszt):
     EgyesValaszt_Button = Button(
         text="1.",
         font=("Josefin Sans", 20, "bold"),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -408,9 +385,9 @@ def admin_question_edit(valaszt):
     KettesValaszt_Button = Button(
         text="2.",
         font=("Josefin Sans", 20, "bold"),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -426,9 +403,9 @@ def admin_question_edit(valaszt):
     HarmasValaszt_Button = Button(
         text="3.",
         font=("Josefin Sans", 20, "bold"),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -444,9 +421,9 @@ def admin_question_edit(valaszt):
     NegyestValaszt_Button = Button(
         text="4.",
         font=("Josefin Sans", 20, "bold"),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -463,6 +440,8 @@ def admin_question_edit(valaszt):
 
 
     '''Login for admins'''
+
+#From the main menu you can registrate or you can login to the game as user. There is one more secret login button for the admins
 def admin_login():
 
 
@@ -564,12 +543,6 @@ def admin_login():
 
     window.resizable(False, False)
     window.mainloop()
-
-
-
-
-
-'''From the main menu you can registrate or you can login to the game as user. There is one more secret login button for the admins'''
 def main_menu():
 
     def selfDestroy():
@@ -974,41 +947,40 @@ def successful_registration():
     window.mainloop()
 
 #The quiz: 10 questions all with 4 answers from where you can choose one
-def question(felhasznalonev):
-
-    pontszam = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
+def question(felhasznalonev, questions,i):
+    score = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     valaszt = arr.array('i', [0])
-    alapSzin = "#659CCE"
-    kivalSzin = "#1F9393"
-    question=database.child("Kerdesek").child("Kerdes1").child("Kerdes").get().val()
-    good_answer=database.child("Valaszok").child("Valasz1").child("Jo_Valasz").get().val()
-    wrong_answer1=database.child("Valaszok").child("Valasz1").child("Rossz_Valasz1").get().val()
-    wrong_answer2=database.child("Valaszok").child("Valasz1").child("Rossz_Valasz2").get().val()
-    wrong_answer3 = database.child("Valaszok").child("Valasz1").child("Rossz_Valasz3").get().val()
+    base_color = "#659CCE"
+    selected_color = "#1F9393"
+
+    question1=database.child("Kerdesek").child("Kerdes"+questions[i]).child("Kerdes").get().val()
+    good_answer=database.child("Valaszok").child("Valasz"+questions[i]).child("Jo_Valasz").get().val()
+    wrong_answer1=database.child("Valaszok").child("Valasz"+questions[i]).child("Rossz_Valasz1").get().val()
+    wrong_answer2=database.child("Valaszok").child("Valasz"+questions[i]).child("Rossz_Valasz2").get().val()
+    wrong_answer3 = database.child("Valaszok").child("Valasz"+questions[i]).child("Rossz_Valasz3").get().val()
 
     # Add a question and answers to the canvas
-    question_label = Label(text=question, font=("Josefin Sans", 20), bg="#659CCE", fg="#000000",anchor="center",width=45,height=4)
+    question_label = Label(text=question1, font=("Josefin Sans", 20), bg="#659CCE", fg="#000000",anchor="center",width=45,height=4)
     question_label.place(x=180, y=110)
-
 
     def gombkivalaszt(gombszam):
 
-        valasz1_button.configure(background=alapSzin, activebackground=alapSzin),
-        valasz2_button.configure(background=alapSzin, activebackground=alapSzin),
-        valasz3_button.configure(background=alapSzin, activebackground=alapSzin),
-        valasz4_button.configure(background=alapSzin, activebackground=alapSzin),
+        valasz1_button.configure(background=base_color, activebackground=base_color),
+        valasz2_button.configure(background=base_color, activebackground=base_color),
+        valasz3_button.configure(background=base_color, activebackground=base_color),
+        valasz4_button.configure(background=base_color, activebackground=base_color),
 
         if gombszam == 1:
-            valasz1_button.configure(background=kivalSzin, activebackground=kivalSzin),
+            valasz1_button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 1
         elif gombszam == 2:
-            valasz2_button.configure(background=kivalSzin, activebackground=kivalSzin),
+            valasz2_button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 2
         elif gombszam == 3:
-            valasz3_button.configure(background=kivalSzin, activebackground=kivalSzin),
+            valasz3_button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 3
         elif gombszam == 4:
-            valasz4_button.configure(background=kivalSzin, activebackground=kivalSzin),
+            valasz4_button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 4
 
         Kerdes_Mehet_Button.configure(state=NORMAL),
@@ -1022,11 +994,11 @@ def question(felhasznalonev):
         valasz3_button.destroy()
         valasz4_button.destroy()
 
-        pontszam_label.destroy()
+        score_label.destroy()
         question_label.destroy()
 
-    pontszam_label = Label(text=pontszam, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
-    pontszam_label.place(x = 180,y = 19)
+    score_label = Label(text=score, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
+    score_label.place(x = 180,y = 19)
 
 
     img2 = PhotoImage(file=f"Kovetkezo_Kerdes.png")
@@ -1035,7 +1007,7 @@ def question(felhasznalonev):
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command=lambda :[selfDestroy(), question(felhasznalonev)],
+        command=lambda :[selfDestroy(),question(felhasznalonev, questions, i=i+1)],
         relief="flat")
 
     Kerdes_Tovabb_Button.place(
@@ -1069,7 +1041,7 @@ def question(felhasznalonev):
             highlightthickness=0,
             state=DISABLED,
             activebackground="#08082C",
-            command=lambda :[selfDestroy(),question(felhasznalonev)],
+            command=lambda :[selfDestroy(), question(felhasznalonev, questions, i=i+1)],
             relief="flat")
 
     Kerdes_Mehet_Button.place(
@@ -1081,9 +1053,9 @@ def question(felhasznalonev):
     valasz1_button = Button(
         text=good_answer,
         font=("Josefin Sans", 20),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -1099,9 +1071,9 @@ def question(felhasznalonev):
     valasz3_button = Button(
         text=wrong_answer1,
         font=("Josefin Sans", 20),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -1117,9 +1089,9 @@ def question(felhasznalonev):
     valasz2_button = Button(
         text=wrong_answer2,
         font=("Josefin Sans", 20),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -1139,9 +1111,9 @@ def question(felhasznalonev):
     valasz4_button = Button(
         text=wrong_answer3,
         font=("Josefin Sans", 20),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -1160,12 +1132,12 @@ def question(felhasznalonev):
 #A window where you can view your score, you can go to play or you can go log out
 def play(felhasznalonev):
 
-    pontszam = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
+    score = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
 
     def selfDestroy():
         Jatsz_Kijelentkezes_Button.destroy()
         Jatsz_Kezdes_Button.destroy()
-        pontszam_label.destroy()
+        score_label.destroy()
         felhasznaloNev_label.destroy()
 
     background_img = PhotoImage(file=f"Jatsz_Background.png")
@@ -1176,7 +1148,7 @@ def play(felhasznalonev):
 
 
 
-    pontszam_label = Label(text=pontszam,
+    score_label = Label(text=score,
 
                    font=("Josefin Sans", 20),
                    bg="#18115E",
@@ -1184,7 +1156,7 @@ def play(felhasznalonev):
 
 
 
-    pontszam_label.place(x = 190,y = 62)
+    score_label.place(x = 190,y = 62)
 
     felhasznaloNev_label = Label(
                    text=felhasznalonev,
@@ -1257,18 +1229,6 @@ def choose_category(felhasznalonev):
         elif gombszam == 4:
             NegyestValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
             valaszt[0] = 4
-    '''
-    def csinaljuk():
-        if valaszt[0]==int(1):
-            print("Egyes volt kivalasztva")
-        elif valaszt[0]== int(2):
-            print("Kettes volt kivalasztva")
-        elif valaszt[0]==int(3):
-            print("Harmas volt kivalasztva")
-        elif valaszt[0]==int(4):
-            print("Negyes volt kivalasztva")
-    '''
-
 
     def doingEnable():
         if valaszt[0] == int(0):
@@ -1276,8 +1236,31 @@ def choose_category(felhasznalonev):
             labelError.place(x=425, y=385)
             labelError.after(1500, lambda: [labelError.destroy()])
         else:
+            if valaszt[0] == int(1):
+                category = '1'
+            elif valaszt[0] == int(2):
+                category = '2'
+            elif valaszt[0] == int(3):
+                category = '3'
+            elif valaszt[0] == int(4):
+                category = '4'
+
+            questions_database = database.child("Kerdesek").get().val()
+            questions = []
+            while 1:
+                rand_number = random.randint(1,
+                                             len(questions_database))  # random number into 1 and the length of questions
+                categoryy = database.child("Kerdesek").child('Kerdes' + str(rand_number)).child(
+                    "Kategoria_ID").get().val()
+                if str(categoryy) == category:
+                    questions.append(str(rand_number))
+                else:
+                    print(rand_number)
+                    continue
+                if len(questions) == 3:
+                    break
             selfDestroy()
-            question(felhasznalonev)
+            question(felhasznalonev,questions,0)
 
     def selfDestroy():
         Kategoriak_Vissza_Button.destroy()
@@ -1420,8 +1403,8 @@ def user_question_create(felhasznalonev):
 
 
     valaszt = arr.array('i', [0])
-    alapSzin = "#659CCE"
-    kivalSzin = "#201F93"
+    base_color = "#659CCE"
+    selected_color = "#201F93"
 
     def save(felhasznalonev):
         felhasznaloID = database.child("Felhasznalok").child(felhasznalonev).child("Felhasznalo_ID").get().val()
@@ -1479,25 +1462,25 @@ def user_question_create(felhasznalonev):
 
     def gombkivalaszt(gombszam):
 
-        EgyesValaszt_Button.configure(background=alapSzin, activebackground=alapSzin),
-        KettesValaszt_Button.configure(background=alapSzin, activebackground=alapSzin),
-        HarmasValaszt_Button.configure(background=alapSzin, activebackground=alapSzin),
-        NegyestValaszt_Button.configure(background=alapSzin, activebackground=alapSzin),
+        EgyesValaszt_Button.configure(background=base_color, activebackground=base_color),
+        KettesValaszt_Button.configure(background=base_color, activebackground=base_color),
+        HarmasValaszt_Button.configure(background=base_color, activebackground=base_color),
+        NegyestValaszt_Button.configure(background=base_color, activebackground=base_color),
 
         if gombszam == 1:
-            EgyesValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
+            EgyesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 1
 
         elif gombszam == 2:
-            KettesValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
+            KettesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 2
 
 
         elif gombszam == 3:
-            HarmasValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
+            HarmasValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 3
         elif gombszam == 4:
-            NegyestValaszt_Button.configure(background=kivalSzin, activebackground=kivalSzin),
+            NegyestValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             valaszt[0] = 4
 
         Felhasznalo_Kerdes_Szerkesztes_Mentes_Button.configure(state=NORMAL)
@@ -1649,9 +1632,9 @@ def user_question_create(felhasznalonev):
     EgyesValaszt_Button = Button(
         text="1.",
         font=("Josefin Sans", 20, "bold"),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -1668,9 +1651,9 @@ def user_question_create(felhasznalonev):
     KettesValaszt_Button = Button(
         text="2.",
         font=("Josefin Sans", 20, "bold"),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -1686,9 +1669,9 @@ def user_question_create(felhasznalonev):
     HarmasValaszt_Button = Button(
         text="3.",
         font=("Josefin Sans", 20, "bold"),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
@@ -1704,9 +1687,9 @@ def user_question_create(felhasznalonev):
     NegyestValaszt_Button = Button(
         text="4.",
         font=("Josefin Sans", 20, "bold"),
-        bg=alapSzin,
+        bg=base_color,
         fg="black",
-        activebackground=alapSzin,
+        activebackground=base_color,
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
