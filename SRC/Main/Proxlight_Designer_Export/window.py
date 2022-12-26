@@ -198,18 +198,8 @@ def admin_question_edit(valaszt):
         Kerdes = Kerdes_Entry.get()
         felhasznaloID  = 1
 
-
-        Kerdesek = database.child("Kerdesek").get().val()
+        Kerdesek = database.child("Kategoriak").child("Kategoria4").get().val()
         Kerdesid = len(Kerdesek) + 1
-
-
-        SajatKerdes = {"Felhasznalo_ID": felhasznaloID, "Kategoria_ID": Kategoria, "Kerdes": Kerdes,
-                        "Kerdes_ID":Kerdesid}
-        database.child("Kerdesek").child("Kerdes"+str(Kerdesid)).set(SajatKerdes)
-
-        Valaszok = database.child("Valaszok").get().val()
-        Valaszid = len(Valaszok) + 1
-
         if valaszt[0] == int(1):
             jovalasz = Valasz_1_Entry.get()
             RosszValasz1 = Valasz_4_Entry.get()
@@ -234,13 +224,14 @@ def admin_question_edit(valaszt):
             RosszValasz2 = Valasz_2_Entry.get()
             RosszValasz3 = Valasz_3_Entry.get()
 
+        SajatKerdes = {"Felhasznalo_ID": felhasznaloID, "JoValasz": jovalasz, "Kerdes": Kerdes,
+                       "RosszValasz1": RosszValasz1,
+                       "RosszValasz2": RosszValasz2, "RosszValasz3": RosszValasz3
+
+                       }
+        database.child("Kategoriak").child("Kategoria"+str(Kategoria)).child("Kerdes" + str(Kerdesid)).set(SajatKerdes)
 
 
-        SajatValasz = {"Jo_Valasz": jovalasz, "Kerdes_ID": Kerdesid, "Rossz_Valasz1": RosszValasz1,
-                       "Rossz_Valasz2": RosszValasz2,"Rossz_Valasz3": RosszValasz3,
-                        "Valasz_id":Valaszid}
-
-        database.child("Valaszok").child("Valasz" + str(Valaszid)).set(SajatValasz)
 
 
     background_img = PhotoImage(file=f"Admin_Kerdes_Szerkeszt.png")
@@ -284,10 +275,12 @@ def admin_question_edit(valaszt):
         image=entry0_img)
 
     Kerdes_Entry = Entry(
-        font=18,
+        font=25,
         bd=0,
         bg="#659cce",
-        highlightthickness=0)
+        highlightthickness=0,
+        justify="center"
+    )
 
     Kerdes_Entry.place(
         x=148, y=110,
@@ -306,7 +299,7 @@ def admin_question_edit(valaszt):
         highlightthickness=0)
 
     Valasz_1_Entry.place(
-        x=84, y=322,
+        x=84, y=327,
 
         width=407,
         height=40)
@@ -323,7 +316,7 @@ def admin_question_edit(valaszt):
         highlightthickness=0)
 
     Valasz_2_Entry.place(
-        x=84, y=408,
+        x=84, y=413,
 
         width=407,
         height=40)
@@ -340,7 +333,7 @@ def admin_question_edit(valaszt):
         highlightthickness=0)
 
     Valasz_3_Entry.place(
-        x=609, y=322,
+        x=609, y=327,
 
         width=407,
         height=40)
@@ -358,7 +351,7 @@ def admin_question_edit(valaszt):
 
     Valasz_4_Entry.place(
 
-        x=609, y=408,
+        x=609, y=413,
         width=407,
         height=40)
 
@@ -461,8 +454,6 @@ def admin_login():
 
         if  (felhasznalonev == 'Admin1' or felhasznalonev == 'Admin2' or felhasznalonev == 'Admin3') and jelszo == str(jelszoo):
             selfDestroy()
-
-            Admin_Kerdes_Kivalaszt()
 
             admin_question_choose()
 
@@ -1412,16 +1403,8 @@ def user_question_create(felhasznalonev):
 
 
 
-        Kerdesek = database.child("Kerdesek").get().val()
+        Kerdesek = database.child("Kategoriak").child("Kategoria4").get().val()
         Kerdesid = len(Kerdesek) + 1
-
-        Kategoria = 4 ##sajat
-        SajatKerdes = {"Felhasznalo_ID": felhasznaloID, "Kategoria_ID": Kategoria, "Kerdes": Kerdes,
-                        "Kerdes_ID":Kerdesid}
-        database.child("Kerdesek").child("Kerdes"+str(Kerdesid)).set(SajatKerdes)
-
-        Valaszok = database.child("Valaszok").get().val()
-        Valaszid = len(Valaszok) + 1
 
         if valaszt[0] == int(1):
             jovalasz = Valasz_1_Entry.get()
@@ -1446,18 +1429,12 @@ def user_question_create(felhasznalonev):
             RosszValasz1 = Valasz_1_Entry.get()
             RosszValasz2 = Valasz_2_Entry.get()
             RosszValasz3 = Valasz_3_Entry.get()
+        Kategoria = 4 ##sajat
+        SajatKerdes = {"Felhasznalo_ID": felhasznaloID,"JoValasz":jovalasz,"Kerdes": Kerdes,"RosszValasz1": RosszValasz1,
+                       "RosszValasz2": RosszValasz2, "RosszValasz3": RosszValasz3
 
-
-       # jovalasz = jovalaszfgv()
-
-
-        SajatValasz = {"Jo_Valasz": jovalasz, "Kerdes_ID": Kerdesid, "Rossz_Valasz1": RosszValasz1,
-                       "Rossz_Valasz2": RosszValasz2,"Rossz_Valasz3": RosszValasz3,
-                        "Valasz_id":Valaszid}
-
-        database.child("Valaszok").child("Valasz" + str(Valaszid)).set(SajatValasz)
-
-
+                        }
+        database.child("Kategoriak").child("Kategoria4").child("Kerdes"+str(Kerdesid)).set(SajatKerdes)
 
 
     def gombkivalaszt(gombszam):
