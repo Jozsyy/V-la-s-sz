@@ -4,6 +4,7 @@ import tkinter as tk
 import array as arr
 import pyrebase
 import random
+import time
 
 #Connecting the database to python
 config={
@@ -637,8 +638,7 @@ def user_login():
         bd=0,
         bg="#d9d9d9",
         highlightthickness=0,
-        justify='center'
-)
+        justify='center')
 
     FelhasznaloNev_Bejelentkezes_Entry.place(
         x=399, y=282,
@@ -933,9 +933,11 @@ def successful_registration():
 
 #The quiz: 10 questions all with 4 answers from where you can choose one
 def question(felhasznalonev, category, questions):
+
+
     score = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     choosing = arr.array('i', [0])
-    answers = []
+    answers = [0,0,0,0]
     base_color = "#659CCE"
     selected_color = "#1F9393"
 
@@ -948,11 +950,31 @@ def question(felhasznalonev, category, questions):
 
     mylist = [0,1,2,3]
     random.shuffle(mylist)
-    print(mylist)
-    answers[int(mylist[0])]=good_answer
+   # print(mylist)
+    answers[int(mylist[0])]= good_answer
     answers[int(mylist[1])] = wrong_answer1
     answers[int(mylist[2])] = wrong_answer2
     answers[int(mylist[3])] = wrong_answer3
+
+    choosed = ["none"]
+
+
+    def answer_verification(score):
+
+       if good_answer == choosed[0]:
+           good_answer_label = Label(text="Helyes valasz!", bg="#0B0B31", font=("Josefin Sans", 20), fg="red")
+           good_answer_label.place(x=440, y=270)
+           good_answer_label.after(5000, lambda: [good_answer_label.destroy()])
+           score = int(score) + 1
+           database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").set(score)
+          # time.sleep(2)
+       else :
+           wrong_answer_label = Label(text="Helytelen valasz!", bg="#0B0B31", font=("Josefin Sans", 20), fg="red")
+           wrong_answer_label.place(x=440, y=270)
+           wrong_answer_label.after(5000, lambda: [wrong_answer_label.destroy()])
+          # time.sleep(2)
+
+
 
     # Add a question and answers to the canvas
     question_label = Label(text=questionn, font=("Josefin Sans", 20), bg="#659CCE", fg="#000000",anchor="center",width=45,height=4,wraplength=700)
@@ -968,15 +990,23 @@ def question(felhasznalonev, category, questions):
         if button_number == 1:
             valasz1_button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 1
+            choosed[0]=valasz1_button['text']
+
         elif button_number == 2:
             valasz2_button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 2
+            choosed[0] = valasz2_button['text']
+
         elif button_number == 3:
             valasz3_button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 3
+            choosed[0] = valasz3_button['text']
+
         elif button_number == 4:
             valasz4_button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 4
+            choosed[0] = valasz4_button['text']
+
 
         Kerdes_Mentes_Button.configure(state=NORMAL),
 
@@ -1036,7 +1066,7 @@ def question(felhasznalonev, category, questions):
             highlightthickness=0,
             state=DISABLED,
             activebackground="#08082C",
-            command=lambda :[selfDestroy(), question(felhasznalonev, category, questions)],
+            command=lambda :[selfDestroy(),answer_verification(score) ,question(felhasznalonev, category, questions)],
             relief="flat")
 
     Kerdes_Mentes_Button.place(
