@@ -5,7 +5,7 @@ import array as arr
 import pyrebase
 import random
 
-#Pythonkod osszekotese az adatbazissal
+#Connecting the database to python
 config={
       "apiKey": "AIzaSyCVvp08oEuPrBFxEavuYOu7Nd9Hi1bo3Cw",
       "authDomain": "valassz-715f5.firebaseapp.com",
@@ -20,11 +20,6 @@ config={
 
 firebase = pyrebase.initialize_app(config)
 database = firebase.database()
-
-
-def btn_clicked():
-    print("Button Clicked")
-
 
 #Choosing a question category for admins
 def admin_question_choose():
@@ -67,7 +62,7 @@ def admin_question_choose():
 
 
 
-       '''proba'''
+
 
 
        img0 = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Vissza.png")
@@ -199,7 +194,7 @@ def admin_question_edit(valaszt):
         Kerdes = Kerdes_Entry.get()
         felhasznaloID  = 1
 
-        Kerdesek = database.child("Kategoriak").child("Kategoria4").get().val()
+        Kerdesek = database.child("Kategoriak").child("Kategoria"+str(Kategoria)).get().val()
         Kerdesid = len(Kerdesek) + 1
         if valaszt[0] == int(1):
             jovalasz = Valasz_1_Entry.get()
@@ -940,6 +935,7 @@ def successful_registration():
 def question(felhasznalonev, category, questions):
     score = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     choosing = arr.array('i', [0])
+    answers = []
     base_color = "#659CCE"
     selected_color = "#1F9393"
 
@@ -950,8 +946,16 @@ def question(felhasznalonev, category, questions):
     wrong_answer2=database.child("Kategoriak").child("Kategoria"+category).child("Kerdes"+i).child("RosszValasz2").get().val()
     wrong_answer3 =database.child("Kategoriak").child("Kategoria"+category).child("Kerdes"+i).child("RosszValasz3").get().val()
 
+    mylist = [0,1,2,3]
+    random.shuffle(mylist)
+    print(mylist)
+    answers[int(mylist[0])]=good_answer
+    answers[int(mylist[1])] = wrong_answer1
+    answers[int(mylist[2])] = wrong_answer2
+    answers[int(mylist[3])] = wrong_answer3
+
     # Add a question and answers to the canvas
-    question_label = Label(text=questionn, font=("Josefin Sans", 20), bg="#659CCE", fg="#000000",anchor="center",width=45,height=4)
+    question_label = Label(text=questionn, font=("Josefin Sans", 20), bg="#659CCE", fg="#000000",anchor="center",width=45,height=4,wraplength=700)
     question_label.place(x=180, y=110)
 
     def choose_button(button_number):
@@ -1042,7 +1046,7 @@ def question(felhasznalonev, category, questions):
 
     img3 = PhotoImage(file=f"valasz1.png")
     valasz1_button = Button(
-        text=good_answer,
+        text=answers[0],
         font=("Josefin Sans", 20),
         bg=base_color,
         fg="black",
@@ -1060,7 +1064,7 @@ def question(felhasznalonev, category, questions):
 
     img4 = PhotoImage(file=f"valasz3.png")
     valasz3_button = Button(
-        text=wrong_answer1,
+        text=answers[1],
         font=("Josefin Sans", 20),
         bg=base_color,
         fg="black",
@@ -1078,7 +1082,7 @@ def question(felhasznalonev, category, questions):
 
     img5 = PhotoImage(file=f"valasz2.png")
     valasz2_button = Button(
-        text=wrong_answer2,
+        text=answers[2],
         font=("Josefin Sans", 20),
         bg=base_color,
         fg="black",
@@ -1097,7 +1101,7 @@ def question(felhasznalonev, category, questions):
 
     img6 = PhotoImage(file=f"valasz4.png")
     valasz4_button = Button(
-        text=wrong_answer3,
+        text=answers[3],
         font=("Josefin Sans", 20),
         bg=base_color,
         fg="black",
@@ -1332,7 +1336,7 @@ def choose_category(felhasznalonev):
 
 
     HarmasValaszt_Button = Button(
-        text="Sport",
+        text="Általános",
         font=("Josefin Sans", 20),
         bg="#201F93",
         fg="white",
@@ -1350,7 +1354,7 @@ def choose_category(felhasznalonev):
 
 
     KettesValaszt_Button = Button(
-        text="Általános",
+        text="Sport",
         font=("Josefin Sans", 20),
         bg="#201F93",
         fg="white",
