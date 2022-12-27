@@ -935,7 +935,7 @@ def successful_registration():
 def question(felhasznalonev, category, questions):
     score = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     choosing = arr.array('i', [0])
-    answers = []
+    answers = [0,0,0,0]
     base_color = "#659CCE"
     selected_color = "#1F9393"
 
@@ -948,7 +948,8 @@ def question(felhasznalonev, category, questions):
 
     mylist = [0,1,2,3]
     random.shuffle(mylist)
-    print(mylist)
+
+
     answers[int(mylist[0])]=good_answer
     answers[int(mylist[1])] = wrong_answer1
     answers[int(mylist[2])] = wrong_answer2
