@@ -1186,7 +1186,7 @@ def play(felhasznalonev):
         score_label.destroy()
         felhasznaloNev_label.destroy()
 
-    background_img = PhotoImage(file=f"Jatssz_Background.png")
+    background_img = PhotoImage(file=f"Jatssz.png")
     background = canvas.create_image(
         540.0, 303.5,
         image=background_img)
