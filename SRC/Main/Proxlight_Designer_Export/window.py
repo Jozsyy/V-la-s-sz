@@ -931,9 +931,8 @@ def successful_registration():
     window.resizable(False, False)
     window.mainloop()
 
-#The quiz: 10 questions all with 4 answers from where you can choose one
+#The quiz: 5 questions all with 4 answers from where you can choose one
 def question(felhasznalonev, category, questions):
-
 
     score = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     choosing = arr.array('i', [0])
@@ -941,7 +940,10 @@ def question(felhasznalonev, category, questions):
     base_color = "#659CCE"
     selected_color = "#1F9393"
 
-    i=questions.pop(0)  #pop the first element from questions
+    try:
+        i=questions.pop(0)  #pop the first element from questions
+    except:
+        choose_category(felhasznalonev)
     questionn=database.child("Kategoriak").child("Kategoria"+category).child("Kerdes"+i).child("Kerdes").get().val()
     good_answer=database.child("Kategoriak").child("Kategoria"+category).child("Kerdes"+i).child("JoValasz").get().val()
     wrong_answer1=database.child("Kategoriak").child("Kategoria"+category).child("Kerdes"+i).child("RosszValasz1").get().val()
@@ -962,25 +964,31 @@ def question(felhasznalonev, category, questions):
 
 
     def answer_verification(score):
-
        if good_answer == choosed[0]:
            good_answer_label = Label(text="Helyes valasz!", bg="#0B0B31", font=("Josefin Sans", 20), fg="red")
            good_answer_label.place(x=440, y=270)
-           good_answer_label.after(5000, lambda: [good_answer_label.destroy()])
+           good_answer_label.after(3500, lambda: [good_answer_label.destroy()])
            score = int(score) + 1
            database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").set(score)
-          # time.sleep(2)
+
+
+
        else :
            wrong_answer_label = Label(text="Helytelen valasz!", bg="#0B0B31", font=("Josefin Sans", 20), fg="red")
            wrong_answer_label.place(x=440, y=270)
-           wrong_answer_label.after(5000, lambda: [wrong_answer_label.destroy()])
-          # time.sleep(2)
+           wrong_answer_label.after(3500, lambda: [wrong_answer_label.destroy()])
+
+
+       selfDestroy()
 
 
 
     # Add a question and answers to the canvas
     question_label = Label(text=questionn, font=("Josefin Sans", 20), bg="#659CCE", fg="#000000",anchor="center",width=45,height=4,wraplength=700)
     question_label.place(x=180, y=110)
+
+    goodColor = "#1F9339"
+
 
     def choose_button(button_number):
 
@@ -992,7 +1000,7 @@ def question(felhasznalonev, category, questions):
         if button_number == 1:
             valasz1_button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 1
-            choosed[0]=valasz1_button['text']
+            choosed[0] = valasz1_button['text']
 
         elif button_number == 2:
             valasz2_button.configure(background=selected_color, activebackground=selected_color),
@@ -1008,9 +1016,20 @@ def question(felhasznalonev, category, questions):
             valasz4_button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 4
             choosed[0] = valasz4_button['text']
-
-
         Kerdes_Mentes_Button.configure(state=NORMAL),
+
+    def goodAnswerHighlight():
+        valasz1_button.configure(background=goodColor, activebackground=goodColor)
+        if valasz1 == good_answer:
+            valasz1_button.configure(background=goodColor, activebackground=goodColor)
+        elif valasz2 == good_answer:
+            valasz2_button.configure(background=goodColor, activebackground=goodColor)
+        elif valasz3 == good_answer:
+            valasz3_button.configure(background=goodColor, activebackground=goodColor)
+        else:
+            valasz4_button.configure(background=goodColor, activebackground=goodColor)
+
+
 
     def selfDestroy():
         Kerdes_Vege_Button.destroy()
@@ -1020,14 +1039,11 @@ def question(felhasznalonev, category, questions):
         valasz2_button.destroy()
         valasz3_button.destroy()
         valasz4_button.destroy()
-
         score_label.destroy()
         question_label.destroy()
 
     score_label = Label(text=score, font=("Josefin Sans", 20), bg="#18115E", fg="#F39C29")
     score_label.place(x = 180,y = 19)
-
-
     img2 = PhotoImage(file=f"Kovetkezo_Kerdes.png")
     Kerdes_Kovetkezo_Button = Button(
         image=img2,
@@ -1068,7 +1084,7 @@ def question(felhasznalonev, category, questions):
             highlightthickness=0,
             state=DISABLED,
             activebackground="#08082C",
-            command=lambda :[selfDestroy(),answer_verification(score) ,question(felhasznalonev, category, questions)],
+            command=lambda :[answer_verification(score),question(felhasznalonev, category, questions)],
             relief="flat")
 
     Kerdes_Mentes_Button.place(
@@ -1149,6 +1165,12 @@ def question(felhasznalonev, category, questions):
         x=566, y=401,
         width=480,
         height=58)
+    valasz1 = valasz1_button.cget('text')
+    valasz2 = valasz2_button.cget('text')
+    valasz3 = valasz3_button.cget('text')
+    valasz4 = valasz4_button.cget('text')
+
+
 
     window.resizable(False, False)
     window.mainloop()
@@ -1164,7 +1186,7 @@ def play(felhasznalonev):
         score_label.destroy()
         felhasznaloNev_label.destroy()
 
-    background_img = PhotoImage(file=f"Jatsz_Background.png")
+    background_img = PhotoImage(file=f"Jatssz_Background.png")
     background = canvas.create_image(
         540.0, 303.5,
         image=background_img)
@@ -1227,7 +1249,6 @@ def play(felhasznalonev):
 #Question category choosing
 def choose_category(felhasznalonev):
 
-    score = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
     choosing = arr.array('i', [0])
     base_color = "#201F93"
     selected_color = "#1F9393"
@@ -1283,7 +1304,7 @@ def choose_category(felhasznalonev):
                     questions.append(str(rand_number))
                 else:
                     continue
-                if len(questions) == 3: #10 questions
+                if len(questions) == 5: #10 questions
                     break
             selfDestroy()
             question(felhasznalonev, category, questions)
