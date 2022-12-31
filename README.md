@@ -19,4 +19,9 @@ You can run this application with double click on it or from command prompt with
 ```bash
 python valassz.py
 ```
+## Contributors
+[Sárkány Illés Sámuel](https://github.com/illes50)
 
+[Bartha Róbert Dezső](https://github.com/Bartha-coder)
+
+[Mikló József-Péter](https://github.com/Jozsyy)
