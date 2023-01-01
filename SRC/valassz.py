@@ -1084,7 +1084,7 @@ def question(felhasznalonev, category, questions):
             highlightthickness=0,
             state=DISABLED,
             activebackground="#08082C",
-            command=lambda :[answer_verification(score),question(felhasznalonev, category, questions)],
+            command=lambda :[answer_verification(score), question(felhasznalonev, category, questions)],
             relief="flat")
 
     Kerdes_Mentes_Button.place(
@@ -1304,7 +1304,7 @@ def choose_category(felhasznalonev):
                     questions.append(str(rand_number))
                 else:
                     continue
-                if len(questions) == 5: #10 questions
+                if len(questions) == 10: #10 questions
                     break
             selfDestroy()
             question(felhasznalonev, category, questions)
@@ -1446,10 +1446,7 @@ def choose_category(felhasznalonev):
 
 #Questions creating for users
 def user_question_create(felhasznalonev):
-
-
-
-    valaszt = arr.array('i', [0])
+    choosing = arr.array('i', [0])
     base_color = "#659CCE"
     selected_color = "#201F93"
 
@@ -1462,25 +1459,25 @@ def user_question_create(felhasznalonev):
         Kerdesek = database.child("Kategoriak").child("Kategoria4").get().val()
         Kerdesid = len(Kerdesek) + 1
 
-        if valaszt[0] == int(1):
+        if choosing[0] == int(1):
             jovalasz = Valasz_1_Entry.get()
             RosszValasz1 = Valasz_4_Entry.get()
             RosszValasz2 = Valasz_2_Entry.get()
             RosszValasz3 = Valasz_3_Entry.get()
 
-        elif valaszt[0] == int(2):
+        elif choosing[0] == int(2):
             jovalasz = Valasz_2_Entry.get()
             RosszValasz1 = Valasz_1_Entry.get()
             RosszValasz2 = Valasz_4_Entry.get()
             RosszValasz3 = Valasz_3_Entry.get()
 
-        elif valaszt[0] == int(3):
+        elif choosing[0] == int(3):
             jovalasz = Valasz_3_Entry.get()
             RosszValasz1 = Valasz_1_Entry.get()
             RosszValasz2 = Valasz_2_Entry.get()
             RosszValasz3 = Valasz_4_Entry.get()
 
-        elif valaszt[0] == int(4):
+        elif choosing[0] == int(4):
             jovalasz = Valasz_4_Entry.get()
             RosszValasz1 = Valasz_1_Entry.get()
             RosszValasz2 = Valasz_2_Entry.get()
@@ -1502,31 +1499,31 @@ def user_question_create(felhasznalonev):
 
         if gombszam == 1:
             EgyesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 1
+            choosing[0] = 1
 
         elif gombszam == 2:
             KettesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 2
+            choosing[0] = 2
 
 
         elif gombszam == 3:
             HarmasValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 3
+            choosing[0] = 3
         elif gombszam == 4:
             NegyestValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 4
+            choosing[0] = 4
 
         Felhasznalo_Kerdes_Szerkesztes_Mentes_Button.configure(state=NORMAL)
 
 
     def jovalaszfgv():
-        if valaszt[0]==int(1):
+        if choosing[0]==int(1):
             return Valasz_1_Entry.get()
-        elif valaszt[0]== int(2):
+        elif choosing[0]== int(2):
             return Valasz_2_Entry.get()
-        elif valaszt[0]==int(3):
+        elif choosing[0]==int(3):
             return Valasz_3_Entry.get()
-        elif valaszt[0]==int(4):
+        elif choosing[0]==int(4):
             return Valasz_4_Entry.get()
 
 
