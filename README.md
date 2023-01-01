@@ -8,7 +8,7 @@ An application that helps people assess their knowledge in various categories of
 ## Installation
 Click [here](https://www.python.org/downloads/) to download Python 3.9 version!
 
-To connect the Firenase database with Python you need to install pip and then Pyrebase!
+To connect the Firebase database with Python you need to install pip and then Pyrebase!
 Use the folowwing command to install pip and Pyrebase:
 ```bash
 pip install
