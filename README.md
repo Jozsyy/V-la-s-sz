@@ -1,7 +1,9 @@
 ![323376429_721780166038456_2418418655201197205_n](https://user-images.githubusercontent.com/79135839/210170718-2f072681-f0b4-4bcb-b147-2f074929fffa.png)
 
+Welcome! This is the Válas(s)z application. Would you like to play a quiz? You're in the right place! Let's play!
+
 ## Introduction
-An application that helps people assess their knowledge in various categories of questions, and if they have a good question idea, they can also add it to the application.
+An application that helps people assess their knowledge in various categories of questions, and if they have a good question idea, they can also add it to the application. A quiz contains ten questions, and each question has one correct answer.
 
 ## Installation
 Click [here](https://www.python.org/downloads/) to download Python 3.9 version!
