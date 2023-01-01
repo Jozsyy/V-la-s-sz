@@ -17,7 +17,7 @@ pip install pyrebase
 If something goes wrong with installation, check out this [video](https://www.youtube.com/watch?v=eGCC3Se6QUE&ab_channel=Codenza)!
 
 ## Usage
-Clone this [Repository](https://github.com/Jozsyy/Valassz) on your computer and then open this folder: Valassz\SRC\Main\Proxlight_Designer_Export.
+Clone this [Repository](https://github.com/Jozsyy/Valassz) on your computer and then open this folder: Valassz\SRC.
 In this folder you will see a python application: valassz.py .
 You can run this application with double click on it or from command prompt with the following command:
 ```bash
