@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="83240573-3ecd-43b5-b02e-90f48628c142" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proxlight_Designer_Export/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/Proxlight_Designer_Export/window.py" afterDir="false" />
-    </list>
+    <list default="true" id="83240573-3ecd-43b5-b02e-90f48628c142" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,7 +24,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Sárkány Illés-Sámuel/Desktop/Egyetem/Szoft_terv/Copy2",
+    "last_opened_file_path": "C:/Users/Sárkány Illés-Sámuel/Desktop/Egyetem/Szoft_terv/Git6",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
@@ -46,6 +43,7 @@
       <workItem from="1669370542847" duration="588000" />
       <workItem from="1669381245799" duration="6877000" />
       <workItem from="1671551256653" duration="82000" />
+      <workItem from="1672574569460" duration="21000" />
     </task>
     <servers />
   </component>
