@@ -32,7 +32,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.valassz">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Valassz" />
       <option name="INTERPRETER_OPTIONS" value="" />
