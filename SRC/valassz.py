@@ -26,6 +26,7 @@ database = firebase.database()
 def admin_question_choose():
        valaszt = arr.array('i', [0])
 
+        #Destroying Button and Labels
        def selfDestroy():
            Admin_Kerdes_Kivalaszt_Szerkeszt_Button1.destroy()
            Admin_Kerdes_Kivalaszt_Szerkeszt_Button2.destroy()
@@ -35,7 +36,6 @@ def admin_question_choose():
            kategoria1_Label.destroy()
            kategoria2_Label.destroy()
            kategoria3_Label.destroy()
-
            kategoria4_Label.destroy()
 
 
@@ -55,15 +55,8 @@ def admin_question_choose():
        kategoria3_Label = Label(window,text = "Általános",background="#201F93",fg="#FFFFFF",font=("Josefin Sans",20))
        kategoria3_Label.place(x = 740,y = 222)
 
-
        kategoria4_Label = Label(window,text = "Felhaszálói",background="#201F93",fg="#FFFFFF",font=("Josefin Sans",20))
        kategoria4_Label.place(x = 725,y = 331)
-
-
-
-
-
-
 
 
        img0 = PhotoImage(file=f"Admin_Kerdes_Kivalaszt_Vissza.png")
@@ -137,46 +130,42 @@ def admin_question_choose():
             width=150,
             height=36)
 
-
-
-
-
-
        window.resizable(False, False)
        window.mainloop()
 
 #If the admin login was successful the admin can create or edit questions
-def admin_question_edit(valaszt):
-    Kategoria = valaszt
-    valaszt = arr.array('i', [0])
+def admin_question_edit(choosing):
+    Kategoria = choosing
+    choosing = arr.array('i', [0])
     base_color = "#659CCE"
     selected_color = "#201F93"
-    def gombkivalaszt(gombszam):
 
-
+    #Marking off the selected button
+    def button_choosing(button_number):
         EgyesValaszt_Button.configure(background=base_color, activebackground=base_color),
         KettesValaszt_Button.configure(background=base_color, activebackground=base_color),
         HarmasValaszt_Button.configure(background=base_color, activebackground=base_color),
         NegyestValaszt_Button.configure(background=base_color, activebackground=base_color),
 
-        if gombszam == 1:
+        if button_number == 1:
             EgyesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 1
+            choosing[0] = 1
 
-        elif gombszam == 2:
+        elif button_number == 2:
             KettesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 2
+            choosing[0] = 2
 
 
-        elif gombszam == 3:
+        elif button_number == 3:
             HarmasValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 3
-        elif gombszam == 4:
+            choosing[0] = 3
+        elif button_number == 4:
             NegyestValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 4
+            choosing[0] = 4
 
         Admin_Kerdes_Szerkeszt_Mentes_Button.configure(state=NORMAL)
 
+    # Destroying Button and Labels
     def selfDestroy():
         Admin_Kerdes_Szerkeszt_Mentes_Button.destroy()
         Admin_Kerdes_Szerkeszt_Vissza_Button.destroy()
@@ -190,43 +179,44 @@ def admin_question_edit(valaszt):
         HarmasValaszt_Button.destroy()
         NegyestValaszt_Button.destroy()
 
+    #Saving the entered question and answers
     def save(Kategoria):
 
-        Kerdes = Kerdes_Entry.get()
-        felhasznaloID  = 1
+        question = Kerdes_Entry.get()
+        userID  = 1
 
-        Kerdesek = database.child("Kategoriak").child("Kategoria"+str(Kategoria)).get().val()
-        Kerdesid = len(Kerdesek) + 1
-        if valaszt[0] == int(1):
-            jovalasz = Valasz_1_Entry.get()
-            RosszValasz1 = Valasz_4_Entry.get()
-            RosszValasz2 = Valasz_2_Entry.get()
-            RosszValasz3 = Valasz_3_Entry.get()
+        questions = database.child("Kategoriak").child("Kategoria"+str(Kategoria)).get().val()
+        questionID = len(questions) + 1
+        if choosing[0] == int(1):
+            good_answer = Valasz_1_Entry.get()
+            wrong_answer1 = Valasz_4_Entry.get()
+            wrong_answer2 = Valasz_2_Entry.get()
+            wrong_answer3 = Valasz_3_Entry.get()
 
-        elif valaszt[0] == int(2):
-            jovalasz = Valasz_2_Entry.get()
-            RosszValasz1 = Valasz_1_Entry.get()
-            RosszValasz2 = Valasz_4_Entry.get()
-            RosszValasz3 = Valasz_3_Entry.get()
+        elif choosing[0] == int(2):
+            good_answer = Valasz_2_Entry.get()
+            wrong_answer1 = Valasz_1_Entry.get()
+            wrong_answer2 = Valasz_4_Entry.get()
+            wrong_answer3 = Valasz_3_Entry.get()
 
-        elif valaszt[0] == int(3):
-            jovalasz = Valasz_3_Entry.get()
-            RosszValasz1 = Valasz_1_Entry.get()
-            RosszValasz2 = Valasz_2_Entry.get()
-            RosszValasz3 = Valasz_4_Entry.get()
+        elif choosing[0] == int(3):
+            good_answer = Valasz_3_Entry.get()
+            wrong_answer1 = Valasz_1_Entry.get()
+            wrong_answer2 = Valasz_2_Entry.get()
+            wrong_answer3 = Valasz_4_Entry.get()
 
-        elif valaszt[0] == int(4):
-            jovalasz = Valasz_4_Entry.get()
-            RosszValasz1 = Valasz_1_Entry.get()
-            RosszValasz2 = Valasz_2_Entry.get()
-            RosszValasz3 = Valasz_3_Entry.get()
+        elif choosing[0] == int(4):
+            good_answer = Valasz_4_Entry.get()
+            wrong_answer1 = Valasz_1_Entry.get()
+            wrong_answer2 = Valasz_2_Entry.get()
+            wrong_answer3 = Valasz_3_Entry.get()
 
-        SajatKerdes = {"Felhasznalo_ID": felhasznaloID, "JoValasz": jovalasz, "Kerdes": Kerdes,
-                       "RosszValasz1": RosszValasz1,
-                       "RosszValasz2": RosszValasz2, "RosszValasz3": RosszValasz3
+        own_question = {"Felhasznalo_ID": userID, "JoValasz": good_answer, "question": question,
+                       "wrong_answer1": wrong_answer1,
+                       "wrong_answer2": wrong_answer2, "wrong_answer3": wrong_answer3
 
                        }
-        database.child("Kategoriak").child("Kategoria"+str(Kategoria)).child("Kerdes" + str(Kerdesid)).set(SajatKerdes)
+        database.child("Kategoriak").child("Kategoria"+str(Kategoria)).child("question" + str(questionID)).set(own_question)
 
 
 
@@ -362,7 +352,7 @@ def admin_question_edit(valaszt):
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: [gombkivalaszt(1)],
+        command=lambda: [button_choosing(1)],
         relief="flat"
     )
 
@@ -381,7 +371,7 @@ def admin_question_edit(valaszt):
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: [gombkivalaszt(2)],
+        command=lambda: [button_choosing(2)],
         relief="flat")
 
     KettesValaszt_Button.place(
@@ -399,7 +389,7 @@ def admin_question_edit(valaszt):
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: [gombkivalaszt(3)],
+        command=lambda: [button_choosing(3)],
         relief="flat")
 
     HarmasValaszt_Button.place(
@@ -417,7 +407,7 @@ def admin_question_edit(valaszt):
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: [gombkivalaszt(4)],
+        command=lambda: [button_choosing(4)],
         relief="flat")
 
     NegyestValaszt_Button.place(
@@ -433,21 +423,23 @@ def admin_question_edit(valaszt):
 
 #From the main menu you can registrate or you can login to the game as user. There is one more secret login button for the admins
 def admin_login():
+    # Destroying Button and Labels
     def selfDestroy():
         Belep_Admin_button.destroy()
         Vissza_Admin_button.destroy()
         FelhasznaloNev_Entry.destroy()
         Jelszo_Entry.destroy()
 
+    #Admin login verifivation
     def verification():
         #Entrykbol kimentjuk az adatokat
-        felhasznalonev=FelhasznaloNev_Entry.get()
-        jelszo=Jelszo_Entry.get()
+        username=FelhasznaloNev_Entry.get()
+        password=Jelszo_Entry.get()
 
         #Felhasznalonevhez tartozo kod az adatbazisbol
-        jelszoo=database.child("Felhasznalok").child(felhasznalonev).child("Jelszo").get().val()
+        pasword2=database.child("Felhasznalok").child(username).child("Jelszo").get().val()
 
-        if  (felhasznalonev == 'Admin1' or felhasznalonev == 'Admin2' or felhasznalonev == 'Admin3') and jelszo == str(jelszoo):
+        if  (username == 'Admin1' or username == 'Admin2' or username == 'Admin3') and password == str(pasword2):
             selfDestroy()
 
             admin_question_choose()
@@ -531,6 +523,7 @@ def admin_login():
     window.mainloop()
 
 def main_menu():
+    # Destroying Button and Labels
     def selfDestroy():
         Bejelentkezes_Button.destroy()
         Regisztracio_button.destroy()
@@ -589,31 +582,27 @@ def main_menu():
     window.resizable(False, False)
     window.mainloop()
 
-
-
-
-    '''Login for users'''
-
+#Login for users
 def user_login():
+    # Destroying Button and Labels
     def selfDestroy():
         FelhasznaloNev_Bejelentkezes_Entry.destroy()
         FelhasznaloJelszo_Bejelentkezes_Entry.destroy()
         Felhasznalo_Bejelentkezes_Belepes_Button.destroy()
         Felhasznalo_Bejelentkezes_Vissza_Button.destroy()
 
-
+    #User log in verification
     def verification():
         #Entrykbol kimentjuk az adatokat
-        felhasznalonev=FelhasznaloNev_Bejelentkezes_Entry.get()
-        jelszo=FelhasznaloJelszo_Bejelentkezes_Entry.get()
+        username=FelhasznaloNev_Bejelentkezes_Entry.get()
+        password=FelhasznaloJelszo_Bejelentkezes_Entry.get()
 
         #Felhasznalonevhez tartozo kod az adatbazisbol
-        jelszoo=database.child("Felhasznalok").child(felhasznalonev).child("Jelszo").get().val()
+        password2=database.child("Felhasznalok").child(username).child("Jelszo").get().val()
 
-        if jelszo == str(jelszoo):
-
+        if password == str(password2):
            selfDestroy()
-           play(felhasznalonev)
+           play(username)
 
 
         else:
@@ -698,6 +687,7 @@ def user_login():
 
 #Registration for the users without you can't play
 def registration():
+    # Destroying Button and Labels
     def selfDestroy():
         Regisztracio_Regisztralas_Button.destroy()
         Regisztracio_Vissza_Button.destroy()
@@ -708,19 +698,20 @@ def registration():
         Regisztracio_FelhasznaloNev_Entry.destroy()
         Regisztracio_JelszoMegegyszer_Entry.destroy()
 
+    #Saving the data from registration
     def save():
         #Az adatokat elmentjuk az adatbazisba
-        vezeteknev = Regisztracio_VezetekNev_Entry.get()
-        keresztnev = Regisztracio_Keresztnev_Entry.get()
-        felhasznalonev = Regisztracio_FelhasznaloNev_Entry.get()
+        lastname = Regisztracio_VezetekNev_Entry.get()
+        firstname = Regisztracio_Keresztnev_Entry.get()
+        username = Regisztracio_FelhasznaloNev_Entry.get()
         email = Regisztracio_Email_Entry.get()
-        jelszo = Regisztracio_Jelszo_Entry.get()
-        jelszo2 = Regisztracio_JelszoMegegyszer_Entry.get()
+        password = Regisztracio_Jelszo_Entry.get()
+        password2 = Regisztracio_JelszoMegegyszer_Entry.get()
 
-        letezofelhasznalonev=database.child("Felhasznalok").child(felhasznalonev).get().val()
-        #Lekerdezzuk az adatbazisbol a felhasznalonevhez tartozo adatokat (Ha 'None' akkor meg nem letezik a felhasznalonev)
-        if str(letezofelhasznalonev)=='None':
-            if jelszo!=jelszo2:
+        existing_username=database.child("Felhasznalok").child(username).get().val()
+        #Retrieve the data associated with the username from the database (If 'None', then the username does not exist)
+        if str(existing_username)=='None':
+            if password!=password2:
                 labelError = Label(text="A két jelszó nem ugyanaz!", bg="#0B0B31",
                                    font=("Josefin Sans", 18), fg="red")
                 labelError.place(x=370, y=160)
@@ -729,15 +720,15 @@ def registration():
                 Felhasznalok = database.child("Felhasznalok").get().val()
                 id=len(Felhasznalok)+1
 
-                #email megerosites
+                #email confirmation
                 try:
                     auth = firebase.auth()
-                    auth.create_user_with_email_and_password(email,jelszo)
-                    user = auth.sign_in_with_email_and_password(email, jelszo)
+                    auth.create_user_with_email_and_password(email,password)
+                    user = auth.sign_in_with_email_and_password(email, password)
                     auth.send_email_verification(user['idToken'])
-                    felhasznalo = {"Felhasznalo_ID": id, "Vezeteknev": vezeteknev, "Keresztnev": keresztnev,
-                                    "Felhasznalonev":felhasznalonev, "Jelszo": jelszo,"Email": email, "Pontszam": "0"}
-                    database.child("Felhasznalok").child(felhasznalonev).set(felhasznalo)
+                    felhasznalo = {"Felhasznalo_ID": id, "Vezeteknev": lastname, "Keresztnev": firstname,
+                                    "Felhasznalonev":username, "Jelszo": password,"Email": email, "Pontszam": "0"}
+                    database.child("Felhasznalok").child(username).set(felhasznalo)
                     selfDestroy()
                     successful_registration()
                 except:
@@ -890,6 +881,7 @@ def registration():
 
 #Successful registration as user
 def successful_registration():
+    # Destroying Button and Labels
     def selfDestroy():
         SikeresRegisztracio_Bejelentkezes_Button.destroy()
         SikeresRegisztracio_EXIT_Button.destroy()
@@ -931,10 +923,10 @@ def successful_registration():
     window.resizable(False, False)
     window.mainloop()
 
-#The quiz: 5 questions all with 4 answers from where you can choose one
-def question(felhasznalonev, category, questions):
+#The quiz: 10 questions all with 4 answers from where you can choose one
+def question(username, category, questions):
 
-    score = database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").get().val()
+    score = database.child("Felhasznalok").child(username).child("Pontszam").get().val()
     choosing = arr.array('i', [0])
     answers = [0,0,0,0]
     base_color = "#659CCE"
@@ -943,7 +935,7 @@ def question(felhasznalonev, category, questions):
     try:
         i=questions.pop(0)  #pop the first element from questions
     except:
-        choose_category(felhasznalonev)
+        choose_category(username)
     questionn=database.child("Kategoriak").child("Kategoria"+category).child("Kerdes"+i).child("Kerdes").get().val()
     good_answer=database.child("Kategoriak").child("Kategoria"+category).child("Kerdes"+i).child("JoValasz").get().val()
     wrong_answer1=database.child("Kategoriak").child("Kategoria"+category).child("Kerdes"+i).child("RosszValasz1").get().val()
@@ -965,23 +957,18 @@ def question(felhasznalonev, category, questions):
 
     def answer_verification(score):
        if good_answer == choosed[0]:
-           good_answer_label = Label(text="Helyes valasz!", bg="#0B0B31", font=("Josefin Sans", 20), fg="red")
+           good_answer_label = Label(text="Helyes válasz!", bg="#0B0B31", font=("Josefin Sans", 20), fg="red")
            good_answer_label.place(x=440, y=270)
            good_answer_label.after(3500, lambda: [good_answer_label.destroy()])
            score = int(score) + 1
-           database.child("Felhasznalok").child(felhasznalonev).child("Pontszam").set(score)
-
-
+           database.child("Felhasznalok").child(username).child("Pontszam").set(score)
 
        else :
-           wrong_answer_label = Label(text="Helytelen valasz!", bg="#0B0B31", font=("Josefin Sans", 20), fg="red")
+           wrong_answer_label = Label(text="Helytelen válasz!", bg="#0B0B31", font=("Josefin Sans", 20), fg="red")
            wrong_answer_label.place(x=440, y=270)
            wrong_answer_label.after(3500, lambda: [wrong_answer_label.destroy()])
 
-
        selfDestroy()
-
-
 
     # Add a question and answers to the canvas
     question_label = Label(text=questionn, font=("Josefin Sans", 20), bg="#659CCE", fg="#000000",anchor="center",width=45,height=4,wraplength=700)
@@ -989,9 +976,8 @@ def question(felhasznalonev, category, questions):
 
     goodColor = "#1F9339"
 
-
+    #Marking off the selected button
     def choose_button(button_number):
-
         valasz1_button.configure(background=base_color, activebackground=base_color),
         valasz2_button.configure(background=base_color, activebackground=base_color),
         valasz3_button.configure(background=base_color, activebackground=base_color),
@@ -1020,17 +1006,16 @@ def question(felhasznalonev, category, questions):
 
     def goodAnswerHighlight():
         valasz1_button.configure(background=goodColor, activebackground=goodColor)
-        if valasz1 == good_answer:
+        if answer1 == good_answer:
             valasz1_button.configure(background=goodColor, activebackground=goodColor)
-        elif valasz2 == good_answer:
+        elif answer2 == good_answer:
             valasz2_button.configure(background=goodColor, activebackground=goodColor)
-        elif valasz3 == good_answer:
+        elif answer3 == good_answer:
             valasz3_button.configure(background=goodColor, activebackground=goodColor)
         else:
             valasz4_button.configure(background=goodColor, activebackground=goodColor)
 
-
-
+    # Destroying Button and Labels
     def selfDestroy():
         Kerdes_Vege_Button.destroy()
         Kerdes_Mentes_Button.destroy()
@@ -1050,7 +1035,7 @@ def question(felhasznalonev, category, questions):
         borderwidth=0,
         highlightthickness=0,
         activebackground="#08082C",
-        command=lambda :[questions.append(i),selfDestroy(),question(felhasznalonev, category, questions)],
+        command=lambda :[questions.append(i), selfDestroy(), question(username, category, questions)],
         relief="flat")
 
     Kerdes_Kovetkezo_Button.place(
@@ -1069,7 +1054,7 @@ def question(felhasznalonev, category, questions):
             borderwidth=0,
             activebackground="#08082C",
             highlightthickness=0,
-            command=lambda: [selfDestroy(), choose_category(felhasznalonev)],
+            command=lambda: [selfDestroy(), choose_category(username)],
             relief="flat")
 
     Kerdes_Vege_Button.place(
@@ -1084,7 +1069,7 @@ def question(felhasznalonev, category, questions):
             highlightthickness=0,
             state=DISABLED,
             activebackground="#08082C",
-            command=lambda :[answer_verification(score),question(felhasznalonev, category, questions)],
+            command=lambda :[answer_verification(score), question(username, category, questions)],
             relief="flat")
 
     Kerdes_Mentes_Button.place(
@@ -1165,12 +1150,10 @@ def question(felhasznalonev, category, questions):
         x=566, y=401,
         width=480,
         height=58)
-    valasz1 = valasz1_button.cget('text')
-    valasz2 = valasz2_button.cget('text')
-    valasz3 = valasz3_button.cget('text')
-    valasz4 = valasz4_button.cget('text')
-
-
+    answer1 = valasz1_button.cget('text')
+    answer2 = valasz2_button.cget('text')
+    answer3 = valasz3_button.cget('text')
+    answer4 = valasz4_button.cget('text')
 
     window.resizable(False, False)
     window.mainloop()
@@ -1191,16 +1174,11 @@ def play(felhasznalonev):
         540.0, 303.5,
         image=background_img)
 
-
-
-
     score_label = Label(text=score,
 
                    font=("Josefin Sans", 20),
                    bg="#18115E",
                    fg="#F39C29")
-
-
 
     score_label.place(x = 190,y = 62)
 
@@ -1213,7 +1191,6 @@ def play(felhasznalonev):
 
 
     #label1.place(x = 190,y = 62)
-
 
     img0 = PhotoImage(file=f"Jatsz_Kijelentkezes.png")
     Jatsz_Kijelentkezes_Button = Button(
@@ -1252,26 +1229,26 @@ def choose_category(felhasznalonev):
     choosing = arr.array('i', [0])
     base_color = "#201F93"
     selected_color = "#1F9393"
-    def gombkivalaszt(gombszam):
+    def button_choosing(button_number):
 
         EgyesValaszt_Button.configure(background=base_color, activebackground=base_color),
         KettesValaszt_Button.configure(background=base_color, activebackground=base_color),
         HarmasValaszt_Button.configure(background=base_color, activebackground=base_color),
         NegyestValaszt_Button.configure(background=base_color, activebackground=base_color),
 
-        if gombszam == 1:
+        if button_number == 1:
             EgyesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 1
 
-        elif gombszam == 2:
+        elif button_number == 2:
             KettesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 2
 
 
-        elif gombszam == 3:
+        elif button_number == 3:
             HarmasValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 3
-        elif gombszam == 4:
+        elif button_number == 4:
             NegyestValaszt_Button.configure(background=selected_color, activebackground=selected_color),
             choosing[0] = 4
 
@@ -1304,11 +1281,12 @@ def choose_category(felhasznalonev):
                     questions.append(str(rand_number))
                 else:
                     continue
-                if len(questions) == 5: #10 questions
+                if len(questions) == 10: #10 questions
                     break
             selfDestroy()
             question(felhasznalonev, category, questions)
 
+    # Destroying Button and Labels
     def selfDestroy():
         Kategoriak_Vissza_Button.destroy()
         Kategoriak_Szerkeszt_Button.destroy()
@@ -1379,7 +1357,7 @@ def choose_category(felhasznalonev):
         activeforeground="white",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda :[gombkivalaszt(1)],
+        command=lambda :[button_choosing(1)],
         relief="flat")
 
     EgyesValaszt_Button.place(
@@ -1397,7 +1375,7 @@ def choose_category(felhasznalonev):
         activeforeground="white",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda :[gombkivalaszt(3)],
+        command=lambda :[button_choosing(3)],
         relief="flat")
 
     HarmasValaszt_Button.place(
@@ -1415,7 +1393,7 @@ def choose_category(felhasznalonev):
         activeforeground="white",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda :[gombkivalaszt(2)],
+        command=lambda :[button_choosing(2)],
         relief="flat")
 
     KettesValaszt_Button.place(
@@ -1433,7 +1411,7 @@ def choose_category(felhasznalonev):
         activebackground="#201F93",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda :[gombkivalaszt(4)],
+        command=lambda :[button_choosing(4)],
         relief="flat")
 
     NegyestValaszt_Button.place(
@@ -1446,90 +1424,90 @@ def choose_category(felhasznalonev):
 
 #Questions creating for users
 def user_question_create(felhasznalonev):
-
-
-
-    valaszt = arr.array('i', [0])
+    choosing = arr.array('i', [0])
     base_color = "#659CCE"
     selected_color = "#201F93"
 
-    def save(felhasznalonev):
-        felhasznaloID = database.child("Felhasznalok").child(felhasznalonev).child("Felhasznalo_ID").get().val()
-        Kerdes = Kerdes_Entry.get()
+    #Saving the entered question and answers
+    def save(username):
+        userID = database.child("Felhasznalok").child(username).child("Felhasznalo_ID").get().val()
+        question = Kerdes_Entry.get()
 
 
 
-        Kerdesek = database.child("Kategoriak").child("Kategoria4").get().val()
-        Kerdesid = len(Kerdesek) + 1
+        questions = database.child("Kategoriak").child("Kategoria4").get().val()
+        questionID = len(questions) + 1
 
-        if valaszt[0] == int(1):
-            jovalasz = Valasz_1_Entry.get()
-            RosszValasz1 = Valasz_4_Entry.get()
-            RosszValasz2 = Valasz_2_Entry.get()
-            RosszValasz3 = Valasz_3_Entry.get()
+        if choosing[0] == int(1):
+            good_answer = Valasz_1_Entry.get()
+            wrong_answer1 = Valasz_4_Entry.get()
+            wrong_answer2 = Valasz_2_Entry.get()
+            wrong_answer3 = Valasz_3_Entry.get()
 
-        elif valaszt[0] == int(2):
-            jovalasz = Valasz_2_Entry.get()
-            RosszValasz1 = Valasz_1_Entry.get()
-            RosszValasz2 = Valasz_4_Entry.get()
-            RosszValasz3 = Valasz_3_Entry.get()
+        elif choosing[0] == int(2):
+            good_answer = Valasz_2_Entry.get()
+            wrong_answer1 = Valasz_1_Entry.get()
+            wrong_answer2 = Valasz_4_Entry.get()
+            wrong_answer3 = Valasz_3_Entry.get()
 
-        elif valaszt[0] == int(3):
-            jovalasz = Valasz_3_Entry.get()
-            RosszValasz1 = Valasz_1_Entry.get()
-            RosszValasz2 = Valasz_2_Entry.get()
-            RosszValasz3 = Valasz_4_Entry.get()
+        elif choosing[0] == int(3):
+            good_answer = Valasz_3_Entry.get()
+            wrong_answer1 = Valasz_1_Entry.get()
+            wrong_answer2 = Valasz_2_Entry.get()
+            wrong_answer3 = Valasz_4_Entry.get()
 
-        elif valaszt[0] == int(4):
-            jovalasz = Valasz_4_Entry.get()
-            RosszValasz1 = Valasz_1_Entry.get()
-            RosszValasz2 = Valasz_2_Entry.get()
-            RosszValasz3 = Valasz_3_Entry.get()
-        Kategoria = 4 ##sajat
-        SajatKerdes = {"Felhasznalo_ID": felhasznaloID,"JoValasz":jovalasz,"Kerdes": Kerdes,"RosszValasz1": RosszValasz1,
-                       "RosszValasz2": RosszValasz2, "RosszValasz3": RosszValasz3
+        elif choosing[0] == int(4):
+            good_answer = Valasz_4_Entry.get()
+            wrong_answer1 = Valasz_1_Entry.get()
+            wrong_answer2 = Valasz_2_Entry.get()
+            wrong_answer3 = Valasz_3_Entry.get()
+
+        category = 4 ##sajat
+        own_question = {"Felhasznalo_ID": userID,"JoValasz":good_answer,"question": question,"wrong_answer1": wrong_answer1,
+                       "wrong_answer2": wrong_answer2, "wrong_answer3": wrong_answer3
 
                         }
-        database.child("Kategoriak").child("Kategoria4").child("Kerdes"+str(Kerdesid)).set(SajatKerdes)
+        database.child("Kategoriak").child("Kategoria4").child("question"+str(questionID)).set(own_question)
 
 
-    def gombkivalaszt(gombszam):
+    #Marking off the selected button
+    def button_choosing(button_number):
 
         EgyesValaszt_Button.configure(background=base_color, activebackground=base_color),
         KettesValaszt_Button.configure(background=base_color, activebackground=base_color),
         HarmasValaszt_Button.configure(background=base_color, activebackground=base_color),
         NegyestValaszt_Button.configure(background=base_color, activebackground=base_color),
 
-        if gombszam == 1:
+        if button_number == 1:
             EgyesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 1
+            choosing[0] = 1
 
-        elif gombszam == 2:
+        elif button_number == 2:
             KettesValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 2
+            choosing[0] = 2
 
 
-        elif gombszam == 3:
+        elif button_number == 3:
             HarmasValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 3
-        elif gombszam == 4:
+            choosing[0] = 3
+        elif button_number == 4:
             NegyestValaszt_Button.configure(background=selected_color, activebackground=selected_color),
-            valaszt[0] = 4
+            choosing[0] = 4
 
         Felhasznalo_Kerdes_Szerkesztes_Mentes_Button.configure(state=NORMAL)
 
 
-    def jovalaszfgv():
-        if valaszt[0]==int(1):
+    def goodanswer_func():
+        if choosing[0]==int(1):
             return Valasz_1_Entry.get()
-        elif valaszt[0]== int(2):
+        elif choosing[0]== int(2):
             return Valasz_2_Entry.get()
-        elif valaszt[0]==int(3):
+        elif choosing[0]==int(3):
             return Valasz_3_Entry.get()
-        elif valaszt[0]==int(4):
+        elif choosing[0]==int(4):
             return Valasz_4_Entry.get()
 
-
+    # Destroying Button and Labels
     def selfDestroy():
         Felhasznalo_Kerdes_Szerkesztes_Mentes_Button.destroy()
         Felhasznalo_Kerdes_Szerkesztes_Vissza_Button.destroy()
@@ -1671,7 +1649,7 @@ def user_question_create(felhasznalonev):
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: [gombkivalaszt(1)],
+        command=lambda: [button_choosing(1)],
         relief="flat"
     )
 
@@ -1690,7 +1668,7 @@ def user_question_create(felhasznalonev):
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: [gombkivalaszt(2)],
+        command=lambda: [button_choosing(2)],
         relief="flat")
 
     KettesValaszt_Button.place(
@@ -1708,7 +1686,7 @@ def user_question_create(felhasznalonev):
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: [gombkivalaszt(3)],
+        command=lambda: [button_choosing(3)],
         relief="flat")
 
     HarmasValaszt_Button.place(
@@ -1726,7 +1704,7 @@ def user_question_create(felhasznalonev):
         activeforeground="black",
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: [gombkivalaszt(4)],
+        command=lambda: [button_choosing(4)],
         relief="flat")
 
     NegyestValaszt_Button.place(
